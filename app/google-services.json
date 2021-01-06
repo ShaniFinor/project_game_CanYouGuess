@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "236730400050",
+    "project_id": "shani-finor-project",
+    "storage_bucket": "shani-finor-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236730400050:android:504dcc0520651e80c66b2b",
+        "android_client_info": {
+          "package_name": "com.example.shanifinor_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236730400050-65pv76dmhc54g8nqpmfkv6pt4knfnhbn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shanifinor_project",
+            "certificate_hash": "310093efe2107f8f8cab7d57840ee25ce3ed99c8"
+          }
+        },
+        {
+          "client_id": "236730400050-d1mf176ttod9roerrvd8p00itqilofol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvqNsbHL4Ho0OBe2NKkvBVj4ZmNyRZOw0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236730400050-d1mf176ttod9roerrvd8p00itqilofol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

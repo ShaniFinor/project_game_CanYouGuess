@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="clip_horizontal"
+    android:orientation="vertical"
+    tools:context=".Game">
+
+
+    <ImageView
+        android:id="@+id/imgClues"
+        android:layout_width="34dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="28dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_clues_options"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <FrameLayout
+        android:id="@+id/flipView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/card_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_star"
+            app:tint="@color/colorAccent"></ImageView>
+
+        <ImageView
+            android:id="@+id/card_front"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_star"
+            app:tint="#EEEB42"></ImageView>
+    </FrameLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageHidden"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"></ImageView>
+
+        <GridView
+            android:id="@+id/gridViewAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20sp"
+            android:columnWidth="40sp"
+            android:horizontalSpacing="4sp"
+            android:numColumns="auto_fit"
+            android:padding="4sp"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:verticalSpacing="4sp"></GridView>
+
+        <GridView
+            android:id="@+id/gridViewSuggest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20sp"
+            android:columnWidth="40sp"
+            android:horizontalSpacing="4sp"
+            android:numColumns="auto_fit"
+            android:padding="4sp"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:verticalSpacing="4sp"></GridView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></Button>
+</androidx.constraintlayout.widget.ConstraintLayout>

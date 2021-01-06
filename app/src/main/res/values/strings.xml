@@ -1,0 +1,44 @@
+<resources>
+
+    <string name="app_name">Shani Finor- Project</string>
+
+    <string name="text_view_project">Can You Guess?</string>
+    <string name="main_activity_game">למשחק</string>
+    <string name="main_activity_instructions">הוראות</string>
+    <string name="main_activity_get_star">השג כוכב</string>
+
+    <string name="activity_get_star_text">בשביל לקבל כוכב, צריך ללחוץ 100 פעמים על הכפתור האדום</string>
+
+    <string name="activity_game_menu_levels">שלבים</string>
+
+    <string name="activity_instructions_title">הוראות</string>
+    <string name="instructions_subtitle_the_game">המשחק</string>
+    <string name="instructions_the_game">"\במשחק מוסתרת תמונה על ידי משבצות (כמו לוח שח מט).
+המטרה שלך לגלות מה היא התמונה המסתתרת.
+כל לחיצה על משבצת בתמונה, פותחת את המשבצת וכך החלק בתמונה שהמשבצת הסתירה, כבר לא יהיה מוסתר עד סוף השלב.
+יש באפשרותך מספר מוגבל של לחיצות על משבצות בכדי לחשוף עוד חלקים של התמונה.
+מתחת לתמונה יש קווים. כל קוו מייצג אות של האובייקט שבתמונה.
+ברשותך מאגר של כ-20 אותיות שבתוכן יש את האותיות של שם התמונה.
+כדי לעבור לשלב הבא, עליך להרכיב עם האותיות את מה שרואים בתמונה.
+לדוגמא: אם יש תמונה של כיסא, עליך להרכיב את המילה 'כיסא'.
+אם הצלחת לגלות מה התמונה, זאת אומרת שסיימת את השלב.
+כשמסיימים שלב מקבלים כוכב.
+במשחק ככל שהשלב יותר מתקדם, יש יותר משבצות שמסתירות את התמונה והתמונה יותר קשה לניחוש.
+</string>
+    <string name="instructions_subtitle_stars">כוכבים</string>
+    <string name="instructions_stars">"\הכוכבים משמשים לקניית רמזים.
+ניתן להשיג את הכוכבים בשתי דרכים.
+דרך 1- כשמסיימים שלב מקבלים כוכב.
+דרך 2- אפשר להיכנס ל'השג כוכב' שנצא במסך הבית.
+ב'השג כוכב' צריך ללחוץ 100 פעמים על הכפתור האדום על מנת לקבל כוכב.
+וכך אם אין לך מספיק כוכבים בשביל לקנות רמז, אפשר להיכנס ל'השג כוכב' ולהשיג כוכבים.
+</string>
+    <string name="instructions_subtitle_clues">רמזים</string>
+    <string name="instructions_clues">"\יש לך אפשרות לרמזים מסוימים, אך הרמזים עולים כוכבים.
+יש כמה סוגי רמזים:
+1. פתיחת משבצת של תמונה (עלות כוכב אחד).
+2. גילוי אות (עלות כוכב אחד).
+3. להעלים חצי מהאותיות שבמאגר האותיות (עלות 3 כוכבים)- ניתן להשתמש בזה רק פעם אחת בכל שלב.
+4. לגלות את התמונה (עלות 5 כוכבים).</string>
+    <string name="password_required">password</string>
+</resources>

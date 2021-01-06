@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/page_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background_list"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView_project"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/bungee_shade"
+        android:gravity="center"
+        android:rotation="-10"
+        android:shadowColor="#F888F8"
+        android:shadowDx="-20"
+        android:shadowDy="10"
+        android:shadowRadius="2"
+        android:text="@string/text_view_project"
+        android:textColor="#DD8135CC"
+        android:textSize="70sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5Stars"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5Stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_project">
+
+        <FrameLayout
+            android:id="@+id/frameLayoutStar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/starFlip1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_star"></ImageView>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayoutStar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/starFlip2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:rotationY="180"
+                android:src="@drawable/ic_star"></ImageView>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayoutStar3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/starFlip3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_star"></ImageView>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayoutStar4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/starFlip4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_star"></ImageView>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayoutStar5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/starFlip5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_star"></ImageView>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_project">
+
+        <Button
+            android:id="@+id/btnGameMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15sp"
+            android:background="@drawable/ripple_button"
+            android:fontFamily="@font/secular_one"
+            android:shadowColor="#80FFFFFF"
+            android:shadowDx="-4"
+            android:shadowDy="4"
+            android:shadowRadius="10"
+            android:text="@string/main_activity_game"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/btnInstructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15sp"
+            android:background="@drawable/ripple_button"
+            android:fontFamily="@font/secular_one"
+            android:shadowColor="#80FFFFFF"
+            android:shadowDx="-4"
+            android:shadowDy="4"
+            android:shadowRadius="10"
+            android:text="@string/main_activity_instructions"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"></Button>
+
+        <Button
+            android:id="@+id/btnGetStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15sp"
+            android:background="@drawable/ripple_button"
+            android:fontFamily="@font/secular_one"
+            android:shadowColor="#80FFFFFF"
+            android:shadowDx="-4"
+            android:shadowDy="4"
+            android:shadowRadius="10"
+            android:text="@string/main_activity_get_star"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"></Button>
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_add"
+        android:tint="#FFFFFF"
+        app:backgroundTint="#80FFFFFF"
+        app:elevation="0sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/win_chart_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_win_chart"
+        android:visibility="invisible"
+        app:backgroundTint="#EEEB42"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintCircle="@id/add_btn"
+        app:layout_constraintCircleAngle="270"
+        app:layout_constraintCircleRadius="100dp"
+        app:layout_constraintEnd_toStartOf="@+id/add_btn" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sound_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_volume"
+        android:visibility="invisible"
+        app:backgroundTint="#EEEB42"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/win_chart_btn"
+        app:layout_constraintCircle="@id/add_btn"
+        app:layout_constraintCircleAngle="315"
+        app:layout_constraintCircleRadius="100dp"
+        app:layout_constraintEnd_toStartOf="@+id/login_btn"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_login"
+        android:visibility="invisible"
+        app:backgroundTint="#EEEB42"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/add_btn"
+        app:layout_constraintCircle="@id/add_btn"
+        app:layout_constraintCircleAngle="0"
+        app:layout_constraintCircleRadius="100dp"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
