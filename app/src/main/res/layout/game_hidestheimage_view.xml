@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E7F0F4"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/list_item_game"
+        android:layout_width="match_parent"
+        android:layout_margin="1dp"
+        android:width="60sp"
+        android:height="60sp"
+        android:background="#273F4A"
+        android:layout_height="match_parent"/>
+</LinearLayout>
+

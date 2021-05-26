@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_list"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.screens.MainActivity">
 
     <TextView
         android:id="@+id/textView_project"
@@ -17,23 +17,24 @@
         android:fontFamily="@font/bungee_shade"
         android:gravity="center"
         android:rotation="-10"
-        android:shadowColor="#F888F8"
+        android:shadowColor="@color/titleShadowTextColor"
         android:shadowDx="-20"
         android:shadowDy="10"
         android:shadowRadius="2"
         android:text="@string/text_view_project"
-        android:textColor="#DD8135CC"
+        android:textColor="@color/titleTextColor"
         android:textSize="70sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5Stars"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
         android:id="@+id/linearLayout5Stars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +49,7 @@
                 android:id="@+id/starFlip1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_star"></ImageView>
+                android:src="@drawable/ic_star"/>
         </FrameLayout>
 
         <FrameLayout
@@ -61,7 +62,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:rotationY="180"
-                android:src="@drawable/ic_star"></ImageView>
+                android:src="@drawable/ic_star"/>
         </FrameLayout>
 
         <FrameLayout
@@ -73,7 +74,7 @@
                 android:id="@+id/starFlip3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_star"></ImageView>
+                android:src="@drawable/ic_star2"/>
 
         </FrameLayout>
 
@@ -86,7 +87,7 @@
                 android:id="@+id/starFlip4"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_star"></ImageView>
+                android:src="@drawable/ic_star"/>
 
         </FrameLayout>
 
@@ -99,7 +100,7 @@
                 android:id="@+id/starFlip5"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_star"></ImageView>
+                android:src="@drawable/ic_star"/>
         </FrameLayout>
 
     </LinearLayout>
@@ -123,12 +124,12 @@
             android:layout_margin="15sp"
             android:background="@drawable/ripple_button"
             android:fontFamily="@font/secular_one"
-            android:shadowColor="#80FFFFFF"
+            android:shadowColor="@color/whiteShadowColor"
             android:shadowDx="-4"
             android:shadowDy="4"
             android:shadowRadius="10"
             android:text="@string/main_activity_game"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:textSize="30sp" />
 
         <Button
@@ -138,13 +139,13 @@
             android:layout_margin="15sp"
             android:background="@drawable/ripple_button"
             android:fontFamily="@font/secular_one"
-            android:shadowColor="#80FFFFFF"
+            android:shadowColor="@color/whiteShadowColor"
             android:shadowDx="-4"
             android:shadowDy="4"
             android:shadowRadius="10"
             android:text="@string/main_activity_instructions"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"></Button>
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
 
         <Button
             android:id="@+id/btnGetStar"
@@ -153,13 +154,13 @@
             android:layout_margin="15sp"
             android:background="@drawable/ripple_button"
             android:fontFamily="@font/secular_one"
-            android:shadowColor="#80FFFFFF"
+            android:shadowColor="@color/whiteShadowColor"
             android:shadowDx="-4"
             android:shadowDy="4"
             android:shadowRadius="10"
             android:text="@string/main_activity_get_star"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"></Button>
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
     </LinearLayout>
 
 
@@ -172,8 +173,8 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_add"
-        android:tint="#FFFFFF"
-        app:backgroundTint="#80FFFFFF"
+        android:tint="@color/white"
+        app:backgroundTint="@color/whiteShadowColor"
         app:elevation="0sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -186,7 +187,7 @@
         android:focusable="true"
         android:src="@drawable/ic_win_chart"
         android:visibility="invisible"
-        app:backgroundTint="#EEEB42"
+        app:backgroundTint="@color/backgroundFloatingMenuButtons"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintCircle="@id/add_btn"
@@ -202,24 +203,24 @@
         android:focusable="true"
         android:src="@drawable/ic_volume"
         android:visibility="invisible"
-        app:backgroundTint="#EEEB42"
+        app:backgroundTint="@color/backgroundFloatingMenuButtons"
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/win_chart_btn"
         app:layout_constraintCircle="@id/add_btn"
         app:layout_constraintCircleAngle="315"
         app:layout_constraintCircleRadius="100dp"
-        app:layout_constraintEnd_toStartOf="@+id/login_btn"
+        app:layout_constraintEnd_toStartOf="@+id/profile_btn"
         app:layout_constraintStart_toEndOf="@+id/linearLayout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/login_btn"
+        android:id="@+id/profile_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_login"
         android:visibility="invisible"
-        app:backgroundTint="#EEEB42"
+        app:backgroundTint="@color/backgroundFloatingMenuButtons"
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/add_btn"
         app:layout_constraintCircle="@id/add_btn"

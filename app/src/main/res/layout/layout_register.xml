@@ -8,12 +8,12 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/close_btn_register"
+        android:id="@+id/close_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_margin="10sp"
-        android:background="@drawable/ic_close"></ImageView>
+        android:background="@drawable/ic_close"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,20 +21,20 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/secular_one"
-        android:shadowColor="#F888F8"
+        android:shadowColor="@color/titleShadowTextColor"
         android:shadowDx="-8"
         android:shadowDy="8"
         android:shadowRadius="2"
-        android:text="הרשמה"
-        android:textColor="#DD8135CC"
-        android:textSize="30sp"></TextView>
+        android:text="@string/register"
+        android:textColor="@color/titleTextColor"
+        android:textSize="30sp"/>
 
     <TextView
         android:layout_width="200dp"
         android:layout_height="3dp"
         android:layout_gravity="center"
         android:layout_marginBottom="15sp"
-        android:background="#DD8135CC"></TextView>
+        android:background="@color/titleTextColor"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="wrap_content"
@@ -49,11 +49,11 @@
             android:autofillHints=""
             android:background="#006200EE"
             android:drawableEnd="@drawable/ic_name"
-            android:hint="שם משתמש"
+            android:hint=" שם משתמש"
             android:inputType="text"
             android:padding="15sp"
             android:textColorHighlight="#96D34F"
-            android:textColorLink="#8BC34A"></EditText>
+            android:textColorLink="#8BC34A"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,11 +70,11 @@
             android:autofillHints=""
             android:background="#006200EE"
             android:drawableEnd="@drawable/ic_email"
-            android:hint="אימייל"
+            android:hint=" אימייל"
             android:inputType="textEmailAddress"
             android:padding="15sp"
             android:textColorHighlight="#9EDD55"
-            android:textColorLink="#8BC34A"></EditText>
+            android:textColorLink="#8BC34A"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -95,7 +95,7 @@
             android:inputType="numberPassword"
             android:padding="15sp"
             android:textColorHighlight="#9EDD55"
-            android:textColorLink="#8BC34A"></EditText>
+            android:textColorLink="#8BC34A"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -117,7 +117,7 @@
             android:inputType="numberPassword"
             android:padding="15sp"
             android:textColorHighlight="#9EDD55"
-            android:textColorLink="#8BC34A"></EditText>
+            android:textColorLink="#8BC34A"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -125,27 +125,28 @@
         android:id="@+id/submitButton"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:text="Sign up"
+        android:text="@string/register"
+        android:textStyle="bold"
         android:textColor="@color/gray"
         app:sub_btn_background="@color/white"
         app:sub_btn_duration="3000"
         app:sub_btn_line_color="#B671E1"
         app:sub_btn_ripple_color="#D681E4"
-        app:sub_btn_tick_color="@color/white"></com.spark.submitbutton.SubmitButton>
+        app:sub_btn_tick_color="@color/white"/>
 
 
-<!--    <Button-->
-<!--        android:id="@+id/btnRegisterOk"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_margin="80sp"-->
-<!--        android:background="@drawable/gradient_background_3"-->
-<!--        android:fontFamily="@font/secular_one"-->
-<!--        android:shadowColor="#80FFFFFF"-->
-<!--        android:shadowDx="-4"-->
-<!--        android:shadowDy="4"-->
-<!--        android:shadowRadius="10"-->
-<!--        android:text="Register"-->
-<!--        android:textColor="#FFFFFF"></Button>-->
+    <!--    <Button-->
+    <!--        android:id="@+id/btnRegisterOk"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_margin="80sp"-->
+    <!--        android:background="@drawable/gradient_background_3"-->
+    <!--        android:fontFamily="@font/secular_one"-->
+    <!--        android:shadowColor="#80FFFFFF"-->
+    <!--        android:shadowDx="-4"-->
+    <!--        android:shadowDy="4"-->
+    <!--        android:shadowRadius="10"-->
+    <!--        android:text="Register"-->
+    <!--        android:textColor="#FFFFFF"></Button>-->
 </LinearLayout>

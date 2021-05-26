@@ -12,30 +12,39 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
-        <activity android:name=".UserProfile"></activity>
         <activity
-            android:name=".ChartWinnings"
-            android:parentActivityName=".MainActivity" />
+            android:name=".ui.screens.UserProfileActivity"
+            android:parentActivityName=".ui.screens.MainActivity" />
         <activity
-            android:name=".GetStar"
-            android:parentActivityName=".MainActivity" />
+            android:name=".ui.screens.ChartWinningsActivity"
+            android:parentActivityName=".ui.screens.MainActivity" />
         <activity
-            android:name=".Instructions"
-            android:parentActivityName=".MainActivity" />
+            android:name=".ui.screens.GetStarActivity"
+            android:parentActivityName=".ui.screens.MainActivity" />
         <activity
-            android:name=".Game"
-            android:parentActivityName=".GameMenu" />
+            android:name=".ui.screens.InstructionsActivity"
+            android:parentActivityName=".ui.screens.MainActivity" />
         <activity
-            android:name=".GameMenu"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SplashScreen">
+            android:name=".ui.screens.GameActivity"
+            android:parentActivityName=".ui.screens.GameMenuActivity" />
+        <activity
+            android:name=".ui.screens.GameMenuActivity"
+            android:parentActivityName=".ui.screens.MainActivity" />
+        <activity android:name=".ui.screens.MainActivity"  />
+
+        <activity android:name=".ui.screens.SplashScreenActivity" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".model.service.MyService"/>
     </application>
 
+<!--    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"-->
+<!--        tools:ignore="ScopedStorage" />-->
+<!--    <uses-permission android:name="android.permission.BATTERY_STATS"-->
+<!--        tools:ignore="ProtectedPermissions" />-->
 </manifest>

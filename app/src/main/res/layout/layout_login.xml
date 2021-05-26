@@ -5,13 +5,13 @@
     android:background="@drawable/sign_in_background_layout"
     android:orientation="vertical">
     <!--    android:background="#B2FFFFFF"-->
-    <ImageView
-        android:id="@+id/close_btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="10sp"
-        android:background="@drawable/ic_close"></ImageView>
+<!--    <ImageView-->
+<!--        android:id="@+id/close_login"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:layout_margin="10sp"-->
+<!--        android:background="@drawable/ic_close"></ImageView>-->
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,20 +19,20 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/secular_one"
-        android:shadowColor="#F888F8"
+        android:shadowColor="@color/titleShadowTextColor"
         android:shadowDx="-8"
         android:shadowDy="8"
         android:shadowRadius="2"
-        android:text="התחברות"
-        android:textColor="#DD8135CC"
-        android:textSize="30sp"></TextView>
+        android:text="@string/login"
+        android:textColor="@color/titleTextColor"
+        android:textSize="30sp"/>
 
     <TextView
         android:layout_width="200dp"
         android:layout_height="3dp"
         android:layout_gravity="center"
         android:layout_marginBottom="15sp"
-        android:background="#DD8135CC"></TextView>
+        android:background="@color/titleTextColor"/>
 
     <EditText
         android:id="@+id/etUserName_login"
@@ -45,7 +45,7 @@
         android:inputType="text"
         android:padding="15sp"
         android:textColorHighlight="#96D34F"
-        android:textColorLink="#8BC34A"></EditText>
+        android:textColorLink="#8BC34A"/>
 
     <EditText
         android:id="@+id/etEmail_login"
@@ -58,7 +58,7 @@
         android:inputType="textEmailAddress"
         android:padding="15sp"
         android:textColorHighlight="#96D34F"
-        android:textColorLink="#8BC34A"></EditText>
+        android:textColorLink="#8BC34A"/>
 
     <EditText
         android:id="@+id/etPassword_login"
@@ -71,7 +71,7 @@
         android:inputType="numberPassword"
         android:padding="15sp"
         android:textColorHighlight="#9EDD55"
-        android:textColorLink="#8BC34A"></EditText>
+        android:textColorLink="#8BC34A"/>
 
     <Button
         android:id="@+id/btnLoginOk"
@@ -81,12 +81,12 @@
         android:layout_marginTop="20sp"
         android:background="@drawable/gradient_background_3"
         android:fontFamily="@font/secular_one"
-        android:shadowColor="#80FFFFFF"
+        android:shadowColor="@color/whiteShadowColor"
         android:shadowDx="-4"
         android:shadowDy="4"
         android:shadowRadius="10"
-        android:text="Login"
-        android:textColor="#FFFFFF"></Button>
+        android:text="@string/login"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/textForRegistration"
@@ -103,12 +103,12 @@
         android:text="If you are not register yet, click here"
         android:textAllCaps="false"
         android:textColor="#000000"
-        android:textSize="15sp"></TextView>
+        android:textSize="15sp"/>
 
     <TextView
         android:layout_width="250dp"
         android:layout_height="1dp"
         android:layout_gravity="center"
         android:layout_marginBottom="15sp"
-        android:background="#3EB4E3"></TextView>
+        android:background="#3EB4E3"/>
 </LinearLayout>

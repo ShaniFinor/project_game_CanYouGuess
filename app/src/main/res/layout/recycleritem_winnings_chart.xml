@@ -10,13 +10,13 @@
         android:layout_width="52dp"
         android:layout_height="45dp"
         android:layout_marginStart="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_winnings_chart_place1"
-        app:layout_constraintStart_toEndOf="@+id/textView_winnings_chart_place1"
-        app:layout_constraintTop_toTopOf="@+id/textView_winnings_chart_place1"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_winnings_chart_place"
+        app:layout_constraintStart_toEndOf="@+id/textView_winnings_chart_place"
+        app:layout_constraintTop_toTopOf="@+id/textView_winnings_chart_place"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView_winnings_chart_place1"
+        android:id="@+id/textView_winnings_chart_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_winnings_chart_name1"
+        android:id="@+id/textView_winnings_chart_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -42,13 +42,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="num of winnings"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_winnings_chart_name1"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_winnings_chart_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView_winnings_chart_name1"
+        app:layout_constraintTop_toTopOf="@+id/textView_winnings_chart_name"
         app:layout_constraintVertical_bias="0.0" />
 
     <View
-        android:id="@+id/divider_horisontal"
+        android:id="@+id/divider_horizontal"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginTop="2dp"

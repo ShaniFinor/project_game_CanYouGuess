@@ -3,4 +3,10 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="titleTextColor">#DD8135CC</color>
+    <color name="titleShadowTextColor">#F888F8</color>
+    <color name="whiteShadowColor">#80FFFFFF</color>
+    <color name="backgroundFloatingMenuButtons">#EEEB42</color>
+
 </resources>

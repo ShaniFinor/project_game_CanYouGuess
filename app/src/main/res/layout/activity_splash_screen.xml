@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen">
+    tools:context=".ui.screens.SplashScreenActivity">
 
     <me.ibrahimsn.particle.ParticleView
         android:id="@+id/particleBackgroundView"
@@ -15,7 +15,7 @@
         app:particleLineColor="#E91E63"
         app:particleLinesEnabled="true"
         app:particleMaxRadius="10"
-        app:particleMinRadius="3"></me.ibrahimsn.particle.ParticleView>
+        app:particleMinRadius="3"/>
 
 
     <ProgressBar
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ProgressBar>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/text_view_progress"
@@ -36,9 +36,9 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="@+id/progress_bar"
         app:layout_constraintStart_toStartOf="@+id/progress_bar"
-        app:layout_constraintTop_toTopOf="@+id/progress_bar"></TextView>
+        app:layout_constraintTop_toTopOf="@+id/progress_bar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Shani Finor- Project</string>
+    <string name="app_name">Shani Finor - Project</string>
 
     <string name="text_view_project">Can You Guess?</string>
     <string name="main_activity_game">למשחק</string>
@@ -40,5 +40,9 @@
 2. גילוי אות (עלות כוכב אחד).
 3. להעלים חצי מהאותיות שבמאגר האותיות (עלות 3 כוכבים)- ניתן להשתמש בזה רק פעם אחת בכל שלב.
 4. לגלות את התמונה (עלות 5 כוכבים).</string>
-    <string name="password_required">password</string>
+    <string name="password_required">סיסמה</string>
+    <string name="login">התחברות</string>
+    <string name="register">הרשמה</string>
+
+    <string name="activity_profile_title">פרופיל</string>
 </resources>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/gradient_background_3"
-    tools:context=".GameMenu">
+    tools:context=".ui.screens.GameMenuActivity">
     <!--<include layout="@layout/custom_toolbar"-->
     <!--    android:id="@+id/custom_toolbar2"> </include>-->
 
@@ -18,190 +18,131 @@
         android:layout_marginTop="30sp"
         android:fontFamily="@font/secular_one"
         android:text="@string/activity_game_menu_levels"
-        android:textColor="#DD8135CC"
-        android:shadowColor="#F888F8"
+        android:textColor="@color/titleTextColor"
+        android:shadowColor="@color/titleShadowTextColor"
         android:shadowDx="-8"
         android:shadowDy="8"
         android:shadowRadius="2"
-        android:textSize="40sp"></TextView>
+        android:textSize="40sp"/>
 
     <TextView
         android:layout_width="200dp"
         android:layout_height="3dp"
         android:layout_gravity="center"
         android:layout_marginBottom="15sp"
-        android:background="#DD8135CC"></TextView>
+        android:background="@color/titleTextColor"/>
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btnLevel1"
-                android:layout_width="84dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/ripple_button"
-                android:textColor="#FFFFFF"
-                android:shadowColor="#80FFFFFF"
-                android:shadowDx="-4"
-                android:shadowDy="4"
-                android:shadowRadius="10"
-                android:fontFamily="@font/libre_franklin_light_italic"
-                android:text="1"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/btnLevel2"
-                android:layout_width="84dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/ripple_button"
-                android:textColor="#FFFFFF"
-                android:shadowColor="#80FFFFFF"
-                android:shadowDx="-4"
-                android:shadowDy="4"
-                android:shadowRadius="10"
-                android:fontFamily="@font/libre_franklin_light_italic"
-                android:text="2"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/btnLevel3"
-                android:layout_width="84dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/ripple_button"
-                android:textColor="#FFFFFF"
-                android:shadowColor="#80FFFFFF"
-                android:shadowDx="-4"
-                android:shadowDy="4"
-                android:shadowRadius="10"
-                android:fontFamily="@font/libre_franklin_light_italic"
-                android:text="3"
-                android:textSize="30sp" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btnLevel4"
-                android:layout_width="84dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/ripple_button"
-                android:textColor="#FFFFFF"
-                android:shadowColor="#80FFFFFF"
-                android:shadowDx="-4"
-                android:shadowDy="4"
-                android:shadowRadius="10"
-                android:fontFamily="@font/libre_franklin_light_italic"
-                android:text="4"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/btnLevel5"
-                android:layout_width="84dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/ripple_button"
-                android:textColor="#FFFFFF"
-                android:shadowColor="#80FFFFFF"
-                android:shadowDx="-4"
-                android:shadowDy="4"
-                android:shadowRadius="10"
-                android:fontFamily="@font/libre_franklin_light_italic"
-                android:text="5"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/btnLevel6"
-                android:layout_width="84dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/ripple_button"
-                android:textColor="#FFFFFF"
-                android:shadowColor="#80FFFFFF"
-                android:shadowDx="-4"
-                android:shadowDy="4"
-                android:shadowRadius="10"
-                android:fontFamily="@font/libre_franklin_light_italic"
-                android:text="6"
-                android:textSize="30sp" />
-        </TableRow>
-    </TableLayout>
+    <GridView
+        android:id="@+id/gameMenuGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="20sp"
+        android:layout_margin="40sp"
+        android:verticalSpacing="20sp"/>
 
 
-    <!-- <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_gravity="center"
-         android:layout_marginTop="30sp"
-         android:orientation="vertical">
 
-         <LinearLayout
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_gravity="center"
-             android:orientation="horizontal"
-             android:padding="10sp">
+    <!--    <TableLayout-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center">-->
 
-             <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_margin="10sp"
-                 android:padding="15sp"
-                 android:text="1"
-                 android:textSize="30sp"></Button>
+    <!--        <TableRow-->
+    <!--            android:id="@+id/tableRow1"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content">-->
 
-             <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_margin="10sp"
-                 android:padding="15sp"
-                 android:text="2"
-                 android:textSize="30sp"></Button>
+    <!--            <Button-->
+    <!--                android:id="@+id/btnLevel1"-->
+    <!--                android:layout_width="84dp"-->
+    <!--                android:layout_margin="10dp"-->
+    <!--                android:background="@drawable/ripple_button"-->
+    <!--                android:textColor="#FFFFFF"-->
+    <!--                android:shadowColor="#80FFFFFF"-->
+    <!--                android:shadowDx="-4"-->
+    <!--                android:shadowDy="4"-->
+    <!--                android:shadowRadius="10"-->
+    <!--                android:fontFamily="@font/libre_franklin_light_italic"-->
+    <!--                android:text="1"-->
+    <!--                android:textSize="30sp" />-->
 
-             <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_margin="10sp"
-                 android:padding="15sp"
-                 android:text="3"
-                 android:textSize="30sp"></Button>
-         </LinearLayout>
+    <!--            <Button-->
+    <!--                android:id="@+id/btnLevel2"-->
+    <!--                android:layout_width="84dp"-->
+    <!--                android:layout_margin="10dp"-->
+    <!--                android:background="@drawable/ripple_button"-->
+    <!--                android:textColor="#FFFFFF"-->
+    <!--                android:shadowColor="#80FFFFFF"-->
+    <!--                android:shadowDx="-4"-->
+    <!--                android:shadowDy="4"-->
+    <!--                android:shadowRadius="10"-->
+    <!--                android:fontFamily="@font/libre_franklin_light_italic"-->
+    <!--                android:text="2"-->
+    <!--                android:textSize="30sp" />-->
 
-         <LinearLayout
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:orientation="horizontal"
-             android:layout_marginTop="10sp"
-             android:layout_gravity="center"
-             android:padding="10sp">
-             <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="4"
-                 android:padding="15sp"
-                 android:layout_margin="10sp"
-                 android:textSize="30sp"></Button>
-             <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="5"
-                 android:padding="15sp"
-                 android:layout_margin="10sp"
-                 android:textSize="30sp"></Button>
-             <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="6"
-                 android:padding="15sp"
-                 android:layout_margin="10sp"
-                 android:textSize="30sp"></Button>
-         </LinearLayout>
- -->
+    <!--            <Button-->
+    <!--                android:id="@+id/btnLevel3"-->
+    <!--                android:layout_width="84dp"-->
+    <!--                android:layout_margin="10dp"-->
+    <!--                android:background="@drawable/ripple_button"-->
+    <!--                android:textColor="#FFFFFF"-->
+    <!--                android:shadowColor="#80FFFFFF"-->
+    <!--                android:shadowDx="-4"-->
+    <!--                android:shadowDy="4"-->
+    <!--                android:shadowRadius="10"-->
+    <!--                android:fontFamily="@font/libre_franklin_light_italic"-->
+    <!--                android:text="3"-->
+    <!--                android:textSize="30sp" />-->
+    <!--        </TableRow>-->
+    <!--        <TableRow-->
+    <!--            android:id="@+id/tableRow2"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content">-->
+
+    <!--            <Button-->
+    <!--                android:id="@+id/btnLevel4"-->
+    <!--                android:layout_width="84dp"-->
+    <!--                android:layout_margin="10dp"-->
+    <!--                android:background="@drawable/ripple_button"-->
+    <!--                android:textColor="#FFFFFF"-->
+    <!--                android:shadowColor="#80FFFFFF"-->
+    <!--                android:shadowDx="-4"-->
+    <!--                android:shadowDy="4"-->
+    <!--                android:shadowRadius="10"-->
+    <!--                android:fontFamily="@font/libre_franklin_light_italic"-->
+    <!--                android:text="4"-->
+    <!--                android:textSize="30sp" />-->
+
+    <!--            <Button-->
+    <!--                android:id="@+id/btnLevel5"-->
+    <!--                android:layout_width="84dp"-->
+    <!--                android:layout_margin="10dp"-->
+    <!--                android:background="@drawable/ripple_button"-->
+    <!--                android:textColor="#FFFFFF"-->
+    <!--                android:shadowColor="#80FFFFFF"-->
+    <!--                android:shadowDx="-4"-->
+    <!--                android:shadowDy="4"-->
+    <!--                android:shadowRadius="10"-->
+    <!--                android:fontFamily="@font/libre_franklin_light_italic"-->
+    <!--                android:text="5"-->
+    <!--                android:textSize="30sp" />-->
+
+    <!--            <Button-->
+    <!--                android:id="@+id/btnLevel6"-->
+    <!--                android:layout_width="84dp"-->
+    <!--                android:layout_margin="10dp"-->
+    <!--                android:background="@drawable/ripple_button"-->
+    <!--                android:textColor="#FFFFFF"-->
+    <!--                android:shadowColor="#80FFFFFF"-->
+    <!--                android:shadowDx="-4"-->
+    <!--                android:shadowDy="4"-->
+    <!--                android:shadowRadius="10"-->
+    <!--                android:fontFamily="@font/libre_franklin_light_italic"-->
+    <!--                android:text="6"-->
+    <!--                android:textSize="30sp" />-->
+    <!--        </TableRow>-->
+    <!--    </TableLayout>-->
 
 </LinearLayout>
