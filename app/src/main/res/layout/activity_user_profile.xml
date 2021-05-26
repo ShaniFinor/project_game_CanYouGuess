@@ -30,7 +30,7 @@
         android:background="@color/titleTextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_tv"/>
+        app:layout_constraintTop_toBottomOf="@+id/profile_tv" />
 
     <ImageButton
         android:id="@+id/logout_imageView"
@@ -44,7 +44,7 @@
         app:layout_constraintHorizontal_bias="0.697"
         app:layout_constraintStart_toEndOf="@+id/profile_tv"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294"/>
+        app:layout_constraintVertical_bias="0.294" />
 
     <TextView
         android:id="@+id/textView4"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile_tv"
         app:layout_constraintTop_toBottomOf="@+id/profile_tv"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
         android:id="@+id/newName_editText"
@@ -74,7 +74,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="@+id/newEmail_editText"
         app:layout_constraintStart_toStartOf="@+id/newEmail_editText"
-        app:layout_constraintTop_toTopOf="@+id/textView4"/>
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView7"
@@ -82,14 +82,30 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="121dp"
         android:padding="15sp"
         android:text="מייל: "
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewProfile"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginBottom="12dp"
+        android:padding="15sp"
+        android:text="תמונת פרופיל: "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewProfile"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintHorizontal_bias="0.701"
+        app:layout_constraintStart_toStartOf="@+id/textView7" />
 
     <EditText
         android:id="@+id/newEmail_editText"
@@ -107,21 +123,21 @@
         app:layout_constraintTop_toTopOf="@+id/textView7" />
 
     <!--    <Button-->
-<!--        android:id="@+id/button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:background="@drawable/gradient_background_3"-->
-<!--        android:fontFamily="@font/secular_one"-->
-<!--        android:onClick="nextPageToAddLevel"-->
-<!--        android:shadowColor="@color/whiteShadowColor"-->
-<!--        android:shadowDx="-4"-->
-<!--        android:shadowDy="4"-->
-<!--        android:shadowRadius="10"-->
-<!--        android:text="עריכת  תמונה"-->
-<!--        android:textColor="@color/white"-->
-<!--        tools:layout_editor_absoluteX="323dp"-->
-<!--        tools:layout_editor_absoluteY="683dp" />-->
+    <!--        android:id="@+id/button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:background="@drawable/gradient_background_3"-->
+    <!--        android:fontFamily="@font/secular_one"-->
+    <!--        android:onClick="nextPageToAddLevel"-->
+    <!--        android:shadowColor="@color/whiteShadowColor"-->
+    <!--        android:shadowDx="-4"-->
+    <!--        android:shadowDy="4"-->
+    <!--        android:shadowRadius="10"-->
+    <!--        android:text="עריכת  תמונה"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        tools:layout_editor_absoluteX="323dp"-->
+    <!--        tools:layout_editor_absoluteY="683dp" />-->
 
     <Button
         android:id="@+id/changeProfile_button"
@@ -155,13 +171,14 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="chooseImageFromLocalFile"
         android:layout_marginTop="12dp"
         android:ellipsize="marquee"
+        android:onClick="chooseImageFromLocalFile"
         android:rotation="0"
         android:scaleX="1"
         android:scaleY="1"
         android:text="תמונה מהגלרייה"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

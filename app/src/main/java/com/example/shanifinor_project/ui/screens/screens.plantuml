@@ -1,0 +1,292 @@
+@startuml
+
+title __SCREENS's Class Diagram__\n
+
+  namespace com.example.shanifinor_project {
+    namespace ui.screens {
+      class com.example.shanifinor_project.ui.screens.ChartWinningsActivity {
+          - database : FirebaseDatabase
+          - mAuth : FirebaseAuth
+          - myRefUsers : DatabaseReference
+          - userDaoMap : Map<String, UserDao>
+          + getCurrentUser()
+          + onCreateOptionsMenu()
+          + onPrepareOptionsMenu()
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace com.example.shanifinor_project {
+    namespace ui.screens {
+      class com.example.shanifinor_project.ui.screens.GameActivity {
+          + answer : char[]
+          + gridViewAnswer : GridView
+          + gridViewSuggest : GridView
+          - answerFinishedLevel : String
+          - btnSubmit : Button
+          - chosenLevelFromMenuActivity : Integer
+          - cluesDialog : AlertDialog
+          - constraintLayout : ConstraintLayout
+          - correct_answer : String
+          - currentImage : int
+          - database : FirebaseDatabase
+          - hiddenAndShownItems : TextView
+          - imageList : List<Integer>
+          - imageViewQuestion : ImageView
+          - imagesFromStorage : List<StorageReference>
+          - imgClues : ImageView
+          - listImagesName : List<String>
+          - localFile : File
+          - maxOpenPictureItems : int
+          - myRefImageData : DatabaseReference
+          - openPictureItems : int
+          {static} - random : Random
+          - result : char[]
+          - storageReference : StorageReference
+          - suggestSource : List<String>
+          + flipSquares()
+          + hideThePicture()
+          + onCreateOptionsMenu()
+          + onPrepareOptionsMenu()
+          + showFinishedLevel()
+          + showPictureInTheOpenSquares()
+          # onCreate()
+          # onStop()
+          - findImagePlaceFromFB()
+          - initView()
+          - reset()
+          - runExistLevel()
+          - runLevel()
+          - setAnswerListForFinishedLevel()
+          - setResultUserAnswerList()
+          - setUpAnswer()
+          - setUpAnswerForFinishedLevel()
+          - setUpImageFinishedLevel()
+          - setUpList()
+          - setUpSaveList()
+          - showCluesAlert()
+      }
+    }
+  }
+  
+
+  namespace com.example.shanifinor_project {
+    namespace ui.screens {
+      class com.example.shanifinor_project.ui.screens.GameMenuActivity {
+          - database : FirebaseDatabase
+          {static} - gridViewLevel : String[]
+          - menuGridView : GridView
+          - mpClickSound : MediaPlayer
+          - numOfStars : Integer
+          - numOfWin : Integer
+          + onCreateOptionsMenu()
+          + onPrepareOptionsMenu()
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace com.example.shanifinor_project {
+    namespace ui.screens {
+      class com.example.shanifinor_project.ui.screens.GetStarActivity {
+          - animation : Animation
+          - btnButton : Button
+          - img_star_animation : ImageView
+          - points : int
+          - txtCounter : TextView
+          + doConfettiAnimation()
+          + onClick()
+          + onCreateOptionsMenu()
+          + onPrepareOptionsMenu()
+          # onCreate()
+          - StartAnimation()
+      }
+    }
+  }
+  
+
+  namespace com.example.shanifinor_project {
+    namespace ui.screens {
+      class com.example.shanifinor_project.ui.screens.InstructionsActivity {
+          + onCreateOptionsMenu()
+          + onPrepareOptionsMenu()
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace com.example.shanifinor_project {
+    namespace ui.screens {
+      class com.example.shanifinor_project.ui.screens.MainActivity {
+          {static} + PREFS_NAME : String
+          - btnGameMenu : Button
+          - btnGetStar : Button
+          - btnInstructions : Button
+          - btnLoginOk : Button
+          - btnRegisterOk : Button
+          - database : FirebaseDatabase
+          - dialogBuilder : Builder
+          - dialogLogin : AlertDialog
+          - dialogRegistration : AlertDialog
+          - etConfirmPasswordRegister : EditText
+          - etEmailLogin : EditText
+          - etEmailRegister : EditText
+          - etPasswordLogin : EditText
+          - etPasswordRegister : EditText
+          - etUserNameLogin : EditText
+          - etUserNameRegister : EditText
+          - fabClose : Animation
+          - fabOpen : Animation
+          - fabRAntiClockwise : Animation
+          - fabRClockwise : Animation
+          - fab_add : FloatingActionButton
+          - fab_chart : FloatingActionButton
+          - fab_profile : FloatingActionButton
+          - fab_sound : FloatingActionButton
+          - fbAuth : FirebaseAuth
+          - fbUser : FirebaseUser
+          - flipView : FrameLayout
+          - flipView2 : FrameLayout
+          - flipView3 : FrameLayout
+          - flipView4 : FrameLayout
+          - flipView5 : FrameLayout
+          - imgCloseRegister : ImageView
+          - isOpen : boolean
+          - isShowedAlarmBatteryOnce : boolean
+          - mCardBackLayout : View
+          - mCardBackLayout2 : View
+          - mCardBackLayout3 : View
+          - mCardBackLayout4 : View
+          - mCardBackLayout5 : View
+          - mCardFrontLayout : View
+          - mCardFrontLayout2 : View
+          - mCardFrontLayout3 : View
+          - mCardFrontLayout4 : View
+          - mCardFrontLayout5 : View
+          - mIsBackVisible : boolean
+          - mIsBackVisible2 : boolean
+          - mIsBackVisible3 : boolean
+          - mIsBackVisible4 : boolean
+          - mIsBackVisible5 : boolean
+          - mSetLeftIn : AnimatorSet
+          - mSetLeftIn2 : AnimatorSet
+          - mSetLeftIn3 : AnimatorSet
+          - mSetLeftIn4 : AnimatorSet
+          - mSetLeftIn5 : AnimatorSet
+          - mSetRightOut : AnimatorSet
+          - mSetRightOut2 : AnimatorSet
+          - mSetRightOut3 : AnimatorSet
+          - mSetRightOut4 : AnimatorSet
+          - mSetRightOut5 : AnimatorSet
+          - mpClickSound : MediaPlayer
+          - myRef : DatabaseReference
+          - submitButtonRegister : SubmitButton
+          + backgroundLayoutColors()
+          + createLoginDialog()
+          + createRegisterDialog()
+          + flipCard()
+          + flipCard2()
+          + flipCard3()
+          + flipCard4()
+          + flipCard5()
+          + floatingActionMenuBar()
+          + onClick()
+          + starsFlipAction()
+          # onCreate()
+          # onStart()
+          - changeCameraDistance()
+          - changeCameraDistance2()
+          - changeCameraDistance3()
+          - changeCameraDistance4()
+          - changeCameraDistance5()
+          - findViews()
+          - findViews2()
+          - findViews3()
+          - findViews4()
+          - findViews5()
+          - loadAnimations()
+          - loadAnimations2()
+          - loadAnimations3()
+          - loadAnimations4()
+          - loadAnimations5()
+      }
+    }
+  }
+  
+
+  namespace com.example.shanifinor_project {
+    namespace ui.screens {
+      class com.example.shanifinor_project.ui.screens.MainActivity.BatteryBroadcastReceiver {
+          + onReceive()
+      }
+    }
+  }
+  
+
+  namespace com.example.shanifinor_project {
+    namespace ui.screens {
+      class com.example.shanifinor_project.ui.screens.SplashScreenActivity {
+          - i : int
+          - particleView : ParticleView
+          - progressBar : ProgressBar
+          - progressText : TextView
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace com.example.shanifinor_project {
+    namespace ui.screens {
+      class com.example.shanifinor_project.ui.screens.UserProfileActivity {
+          - changeProfile : Button
+          - imageLocation : Uri
+          - imageProfile : ImageView
+          - newUserEmail : EditText
+          - newUserName : EditText
+          - userLogout : ImageButton
+          + chooseImageFromLocalFile()
+          + onClick()
+          + onCreateOptionsMenu()
+          + onPrepareOptionsMenu()
+          # onActivityResult()
+          # onCreate()
+          - saveProfileChange()
+      }
+    }
+  }
+  
+
+  com.example.shanifinor_project.ui.screens.ChartWinningsActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.shanifinor_project.ui.screens.ChartWinningsActivity o-- com.example.shanifinor_project.model.db.UserDao : cUser
+  com.example.shanifinor_project.ui.screens.ChartWinningsActivity o-- com.example.shanifinor_project.model.db.UserDao : usersFromData
+  com.example.shanifinor_project.ui.screens.GameActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.shanifinor_project.ui.screens.GameActivity o-- com.example.shanifinor_project.ui.adapter.GridViewAnswerAdapter : answerAdapter
+  com.example.shanifinor_project.ui.screens.GameActivity o-- com.example.shanifinor_project.model.db.UserDao : currentUser
+  com.example.shanifinor_project.ui.screens.GameActivity o-- com.example.shanifinor_project.ui.adapter.GridViewSuggestAdapter : suggestAdapter
+  com.example.shanifinor_project.ui.screens.GameMenuActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.shanifinor_project.ui.screens.GetStarActivity .up.|> android.view.View.OnClickListener
+  com.example.shanifinor_project.ui.screens.GetStarActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.shanifinor_project.ui.screens.InstructionsActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.shanifinor_project.ui.screens.MainActivity .up.|> android.view.View.OnClickListener
+  com.example.shanifinor_project.ui.screens.MainActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.shanifinor_project.ui.screens.MainActivity o-- com.example.shanifinor_project.ui.screens.MainActivity.BatteryBroadcastReceiver : batteryReceiver
+  com.example.shanifinor_project.ui.screens.MainActivity +-down- com.example.shanifinor_project.ui.screens.MainActivity.BatteryBroadcastReceiver
+  com.example.shanifinor_project.ui.screens.MainActivity.BatteryBroadcastReceiver -up-|> android.content.BroadcastReceiver
+  com.example.shanifinor_project.ui.screens.SplashScreenActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.shanifinor_project.ui.screens.UserProfileActivity .up.|> android.view.View.OnClickListener
+  com.example.shanifinor_project.ui.screens.UserProfileActivity -up-|> androidx.appcompat.app.AppCompatActivity
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
