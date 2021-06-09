@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".ui.screens.UserProfileActivity">
 
     <TextView
@@ -11,6 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/secular_one"
         android:shadowColor="@color/titleShadowTextColor"
         android:shadowDx="-8"
@@ -24,6 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="180dp"
         android:layout_height="3dp"
         android:layout_gravity="center"
@@ -36,30 +41,54 @@
         android:id="@+id/logout_imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:background="#00000000"
-        android:contentDescription="logout"
+        android:contentDescription="log out"
         android:src="@drawable/ic_logout"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        android:tooltipText="התנתקות"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.697"
-        app:layout_constraintStart_toEndOf="@+id/profile_tv"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginEnd="16dp"
         android:padding="15sp"
         android:text="שם: "
+        android:fontFamily="@font/secular_one"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintBottom_toBottomOf="@+id/newName_editText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profile_tv"
-        app:layout_constraintTop_toBottomOf="@+id/profile_tv"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toTopOf="@+id/newName_editText" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="15sp"
+        android:text="מייל: "
+        android:fontFamily="@font/secular_one"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="15sp"
+        android:text="תמונת פרופיל: "
+        android:fontFamily="@font/secular_one"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
         android:id="@+id/newName_editText"
@@ -67,45 +96,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:background="#006200EE"
         android:hint="שם משתמש"
+        android:fontFamily="@font/libre_franklin_light_italic"
         android:inputType="text"
         android:padding="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="@+id/newEmail_editText"
-        app:layout_constraintStart_toStartOf="@+id/newEmail_editText"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="121dp"
-        android:padding="15sp"
-        android:text="מייל: "
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_marginBottom="12dp"
-        android:padding="15sp"
-        android:text="תמונת פרופיל: "
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewProfile"
-        app:layout_constraintEnd_toEndOf="@+id/textView7"
-        app:layout_constraintHorizontal_bias="0.701"
-        app:layout_constraintStart_toStartOf="@+id/textView7" />
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/newEmail_editText"
@@ -113,13 +113,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10sp"
-        android:layout_marginEnd="8dp"
         android:background="#006200EE"
         android:hint="אימייל"
+        android:fontFamily="@font/libre_franklin_light_italic"
         android:inputType="textEmailAddress"
         android:padding="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
-        app:layout_constraintEnd_toStartOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="@+id/newName_editText"
+        app:layout_constraintStart_toStartOf="@+id/newName_editText"
         app:layout_constraintTop_toTopOf="@+id/textView7" />
 
     <!--    <Button-->
@@ -144,45 +145,50 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/gradient_background_3"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_ui_button"
         android:fontFamily="@font/secular_one"
-        android:shadowColor="@color/whiteShadowColor"
-        android:shadowDx="-4"
-        android:shadowDy="4"
-        android:shadowRadius="10"
         android:text="עריכה"
-        android:textColor="@color/white"
+        android:textColor="@color/purple"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
-    <ImageView
-        android:id="@+id/imageViewProfile"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginBottom="152dp"
-        app:layout_constraintBottom_toTopOf="@+id/changeProfile_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/gradient_background_2" />
+        app:cardCornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/profile_tv"
+        app:layout_constraintStart_toStartOf="@+id/profile_tv"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+        <ImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_ui_button"
         android:ellipsize="marquee"
-        android:onClick="chooseImageFromLocalFile"
-        android:rotation="0"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:text="תמונה מהגלרייה"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewProfile" />
+        android:fontFamily="@font/secular_one"
+        android:onClick="nextPageToChangeImageProfile"
+        android:text="לשינוי תמונה"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

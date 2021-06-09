@@ -13,6 +13,9 @@
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
         <activity
+            android:name=".ui.screens.ImageItemsProfileActivity"
+            android:parentActivityName=".ui.screens.UserProfileActivity"/>
+        <activity
             android:name=".ui.screens.UserProfileActivity"
             android:parentActivityName=".ui.screens.MainActivity" />
         <activity
@@ -30,21 +33,18 @@
         <activity
             android:name=".ui.screens.GameMenuActivity"
             android:parentActivityName=".ui.screens.MainActivity" />
-        <activity android:name=".ui.screens.MainActivity"  />
-
-        <activity android:name=".ui.screens.SplashScreenActivity" android:noHistory="true">
+        <activity android:name=".ui.screens.MainActivity" />
+        <activity
+            android:name=".ui.screens.SplashScreenActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".model.service.MyService"/>
+
+        <service android:name=".model.service.MyService" />
     </application>
 
-<!--    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"-->
-<!--        tools:ignore="ScopedStorage" />-->
-<!--    <uses-permission android:name="android.permission.BATTERY_STATS"-->
-<!--        tools:ignore="ProtectedPermissions" />-->
 </manifest>

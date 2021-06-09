@@ -19,40 +19,6 @@ public class UserDao {
     public UserDao() {
     }
 
-//    public User(int place, String icon, String name, String email, int numOfWin, int stars) {
-//        this.place = place;
-//        this.icon = icon;
-//        this.name = name;
-//        this.email = email;
-//        this.numOfWin = numOfWin;
-//        this.stars = stars;
-//    }
-
-
-//    public User(int place, String icon, String name, String email, int numOfWin, int stars, String guessedAnswer, String suggestedString, String databaseOpenSquares) {
-//        this.place = place;
-//        this.icon = icon;
-//        this.name = name;
-//        this.email = email;
-//        this.numOfWin = numOfWin;
-//        this.stars = stars;
-//        this.guessedAnswer = guessedAnswer;
-//        this.suggestedString = suggestedString;
-//        this.databaseOpenSquares = databaseOpenSquares;
-//    }
-
-    public UserDao(int place, String icon, String name, int numOfWin) {
-        this.place = place;
-        this.icon = icon;
-        this.name = name;
-        this.numOfWin = numOfWin;
-    }
-    public UserDao(String icon, String name, int numOfWin) {
-        this.icon = icon;
-        this.name = name;
-        this.numOfWin = numOfWin;
-    }
-
     public UserDao(int place, String icon, String name, String email, int numOfWin, int stars, String guessedAnswer, String suggestedString, List<String> databaseOpenSquares, List<Integer> placeChosenFromSuggestedString) {
         this.place = place;
         this.icon = icon;

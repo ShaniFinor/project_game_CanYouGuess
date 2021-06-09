@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    tools:context=".ui.screens.ImageItemsProfileActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imageItem_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/image_item" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress"
+        android:layout_gravity="center"
+        android:indeterminate="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:background="@drawable/background_ui_button"
+        android:fontFamily="@font/secular_one"
+        android:onClick="chooseImageFromLocalFile"
+        android:text="תמונה מהפלאפון"
+        android:textColor="@color/gray" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:background="@drawable/background_ui_button"
+        android:fontFamily="@font/secular_one"
+        android:onClick="camera"
+        android:text="מצלמה"
+        android:textColor="@color/gray" />
+</FrameLayout>

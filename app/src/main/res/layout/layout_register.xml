@@ -50,11 +50,11 @@
             android:background="#006200EE"
             android:drawableEnd="@drawable/ic_name"
             android:hint=" שם משתמש"
+            android:fontFamily="@font/libre_franklin_light_italic"
             android:inputType="text"
             android:padding="15sp"
             android:textColorHighlight="#96D34F"
-            android:textColorLink="#8BC34A"/>
-
+            android:textColorLink="#8BC34A" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -71,6 +71,7 @@
             android:background="#006200EE"
             android:drawableEnd="@drawable/ic_email"
             android:hint=" אימייל"
+            android:fontFamily="@font/libre_franklin_light_italic"
             android:inputType="textEmailAddress"
             android:padding="15sp"
             android:textColorHighlight="#9EDD55"
@@ -92,6 +93,7 @@
             android:autofillHints=""
             android:background="#006200EE"
             android:hint="סיסמה"
+            android:fontFamily="@font/libre_franklin_light_italic"
             android:inputType="numberPassword"
             android:padding="15sp"
             android:textColorHighlight="#9EDD55"
@@ -114,6 +116,7 @@
             android:autofillHints=""
             android:background="#006200EE"
             android:hint="אימות סיסמה"
+            android:fontFamily="@font/libre_franklin_light_italic"
             android:inputType="numberPassword"
             android:padding="15sp"
             android:textColorHighlight="#9EDD55"
@@ -125,14 +128,15 @@
         android:id="@+id/submitButton"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:fontFamily="@font/secular_one"
         android:text="@string/register"
+        android:textColor="@color/purple"
         android:textStyle="bold"
-        android:textColor="@color/gray"
         app:sub_btn_background="@color/white"
         app:sub_btn_duration="3000"
-        app:sub_btn_line_color="#B671E1"
-        app:sub_btn_ripple_color="#D681E4"
-        app:sub_btn_tick_color="@color/white"/>
+        app:sub_btn_line_color="@color/purple"
+        app:sub_btn_ripple_color="@color/titleShadowTextColor"
+        app:sub_btn_tick_color="@color/white" />
 
 
     <!--    <Button-->

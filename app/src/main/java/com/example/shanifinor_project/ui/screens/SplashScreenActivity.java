@@ -8,12 +8,17 @@ import android.os.Handler;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.shanifinor_project.model.classes.User;
+import com.example.shanifinor_project.model.db.Repository;
 import com.example.shanifinor_project.model.service.MyService;
 import com.example.shanifinor_project.R;
+import com.example.shanifinor_project.model.utils.Observer;
+
+import java.util.Observable;
 
 import me.ibrahimsn.particle.ParticleView;
 
-public class SplashScreenActivity extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity implements Observer {
 
     private ParticleView particleView;
     private ProgressBar progressBar;
@@ -25,11 +30,18 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        // Connect to database
+        Repository.getInstance().register(this);
+        User.getInstance();
+
         getSupportActionBar().hide();
         particleView = findViewById(R.id.particleBackgroundView);
         progressBar = findViewById(R.id.progress_bar);
         progressText = findViewById(R.id.text_view_progress);
+    }
 
+    @Override
+    public void update() {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -41,11 +53,12 @@ public class SplashScreenActivity extends AppCompatActivity {
                     handler.postDelayed(this, 50);
                 } else {
                     handler.removeCallbacks(this);
+                    Repository.getInstance().unregister(SplashScreenActivity.this);
                     particleView.pause();
                     Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                     startActivity(intent);
                     Intent intentService = new Intent(SplashScreenActivity.this, MyService.class);
-              //      startService(intentService);
+                    //      startService(intentService);
 
                     if (MyService.isInstanceCreated()) {
                         stopService(intentService);

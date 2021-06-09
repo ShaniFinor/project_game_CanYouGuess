@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import com.example.shanifinor_project.R;
+import com.example.shanifinor_project.model.classes.User;
 
 public class GridViewAnswerAdapter extends BaseAdapter {
     private char[] answerCharacter;
@@ -41,7 +42,6 @@ public class GridViewAnswerAdapter extends BaseAdapter {
         Button button;
         if (view == null) {
 
-
 //            database = FirebaseDatabase.getInstance();
 //            myRef = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/guessedAnswer");
 //            myRef.addValueEventListener(new ValueEventListener() {
@@ -56,6 +56,7 @@ public class GridViewAnswerAdapter extends BaseAdapter {
 //            });
 //             usersAnswer += String.valueOf(answerCharacter[i]);
 //             myRef.setValue(usersAnswer);
+
             //create new button
             button = new Button(context);
             button.setLayoutParams(new GridView.LayoutParams(100, 100));

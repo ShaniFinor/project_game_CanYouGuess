@@ -17,11 +17,15 @@ import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -35,6 +39,7 @@ import com.example.shanifinor_project.R;
 import com.example.shanifinor_project.model.db.UserDao;
 import com.example.shanifinor_project.model.classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
@@ -42,9 +47,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
+import com.google.firebase.storage.StorageReference;
 import com.spark.submitbutton.SubmitButton;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnGameMenu, btnInstructions, btnGetStar;
@@ -116,6 +126,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String PREFS_NAME = "MySharedPreferencesFile";
 
+    private File localFile = null;
+    StorageReference storageReference;
+    FirebaseStorage storage;
+    private Uri filePath;
+    private FirebaseStorage firebaseStorage;
+    private StorageReference listRef;
+    private ArrayList<String> imagelist = new ArrayList<>() ;
+    private  int randomPlace=0;
+    private String stringUriImage="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         batteryReceiver = new MainActivity.BatteryBroadcastReceiver();
         registerReceiver(batteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
-
+        randomProfileImage();
     }
 
     @Override
@@ -164,25 +184,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //User has successfully logged in, save this information
 // We need an Editor object to make preference changes.
-        SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0); // 0 - for private mode
-        SharedPreferences.Editor editor = settings.edit();
-
-//Set "hasLoggedIn" to true
-        editor.putBoolean("hasLoggedIn", true);
-
-// Commit the edits!
-        editor.commit();
-
-//Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
-        boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
+//        SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0); // 0 - for private mode
+//        SharedPreferences.Editor editor = settings.edit();
+//
+////Set "hasLoggedIn" to true
+//        editor.putBoolean("hasLoggedIn", true);
+//
+//// Commit the edits!
+//        editor.commit();
+//
+////Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
+//        boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
 
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
 
-        if(!hasLoggedIn || fbUser==null)
+        if(fbUser==null || User.getInstance()==null)
         {
             createLoginDialog();
         }
+
+//        if(!hasLoggedIn || fbUser==null)
+//        {
+//            createLoginDialog();
+//        }
+//        if(!hasLoggedIn)
+//        {
+//            createLoginDialog();
+//        }
 
 
     }
@@ -331,7 +360,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final View loginPopupView = getLayoutInflater().inflate(R.layout.layout_login, null);
         dialogBuilder.setView(loginPopupView);
         dialogLogin = dialogBuilder.create();
-        dialogLogin.setContentView(R.layout.layout_login);
+       // dialogLogin.setContentView(R.layout.layout_login);
         // dialogLogin.setCancelable(true);
         etEmailLogin = loginPopupView.findViewById(R.id.etEmail_login);
         etUserNameLogin = loginPopupView.findViewById(R.id.etUserName_login);
@@ -390,7 +419,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialogRegistration.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogRegistration.show();
         // btnRegisterOk.setOnClickListener(this);
-        dialogRegistration.setCanceledOnTouchOutside(false);
         submitButtonRegister.setOnClickListener(this);
         imgCloseRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -445,59 +473,77 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        }
 
         if (view == submitButtonRegister) {
-            if (etEmailRegister.getText().toString().length() != 0 &&
-                    etPasswordRegister.getText().toString().length() != 0) {
-                if (etConfirmPasswordRegister.getText().toString().
-                        equals(etPasswordRegister.getText().toString())) {
-                    //firebase. saves the new user values
-                    fbAuth.createUserWithEmailAndPassword(etEmailRegister.getText().toString(), etPasswordRegister.getText().toString())
-                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        UserDao userDao = new UserDao
-                                                (0, "ic_star", etUserNameRegister.getText().toString(), etEmailRegister.getText().toString(),
-                                                        0, 0, "", "",
-                                                        new ArrayList<String>(), new ArrayList<Integer>());
-                                        User.getInstance().registerNewUserToFirebase(userDao);
-                                        // thread- so the button will have time to finish its annotation and after it finishes, it closed the dialog
-                                        final Thread thread = new Thread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    Thread.sleep(3500);
-                                                    dialogRegistration.dismiss();
-                                                } catch (InterruptedException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        });
-                                        thread.start();
-                                        // Toast.makeText(MainActivity.this, "Authentication success.", Toast.LENGTH_SHORT).show();
-                                        //   fab_login.setImageResource(R.drawable.ic_logout);
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                                    }
+            InputMethodManager hideKeyboard = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            hideKeyboard.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                                    // ...
-                                }
-                            });
-                } else {
-                    Toast.makeText(MainActivity.this, "password failed.", Toast.LENGTH_SHORT).show();
+            if (etEmailRegister.getText().toString().length() != 0 &&
+                    etPasswordRegister.getText().toString().length() != 0 &&
+                    !etUserNameRegister.getText().toString().isEmpty() &&
+                    !etConfirmPasswordRegister.getText().toString().isEmpty()) {
+                if (Patterns.EMAIL_ADDRESS.matcher(etEmailRegister.getText()).matches()) {
+                    if (etConfirmPasswordRegister.getText().toString().
+                            equals(etPasswordRegister.getText().toString())) {
+                        //firebase. saves the new user values
+                        fbAuth.createUserWithEmailAndPassword(etEmailRegister.getText().toString(), etPasswordRegister.getText().toString())
+                                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            UserDao userDao = new UserDao
+                                                    (0, stringUriImage, etUserNameRegister.getText().toString(), etEmailRegister.getText().toString(),
+                                                            0, 0, "", "",
+                                                            new ArrayList<String>(), new ArrayList<Integer>());
+                                            User.getInstance().registerNewUserToFirebase(userDao);
+                                            // thread- so the button will have time to finish its annotation and after it finishes, it closed the dialog
+                                            final Thread thread = new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        Thread.sleep(3500);
+                                                        dialogRegistration.dismiss();
+                                                    } catch (InterruptedException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            });
+                                            thread.start();
+                                            // Toast.makeText(MainActivity.this, "Authentication success.", Toast.LENGTH_SHORT).show();
+                                            //   fab_login.setImageResource(R.drawable.ic_logout);
+                                        } else {
+                                            // If sign in fails, display a message to the user.
+                                            Toast.makeText(MainActivity.this, "ההרשמה נכשלה", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        // ...
+                                    }
+                                });
+                    } else {
+                        etConfirmPasswordRegister.setError("הכנס את אותה הסיסמה שהכנסת למעלה");
+                       // Toast.makeText(MainActivity.this, "הסיסמאות שונות", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    etEmailRegister.setError("מייל לא תקין");
+               //     Toast.makeText(MainActivity.this, "מייל לא תקין", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 // If sign in fails, display a message to the user.
-                Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                if(etUserNameRegister.getText().toString().isEmpty())
+                    etUserNameRegister.setError("השדה ריק. רשום שם משתמש");
+                if(etEmailRegister.getText().toString().isEmpty())
+                    etEmailRegister.setError("השדה ריק. הכנס מייל");
+                if(etPasswordRegister.getText().toString().isEmpty())
+                    etPasswordRegister.setError("השדה ריק. הכנס סיסמה");
+                if(etConfirmPasswordRegister.getText().toString().isEmpty())
+                    etConfirmPasswordRegister.setError("השדה ריק. הכנס את אותה הסיסמה שהכנסת למעלה");
+             //   Toast.makeText(MainActivity.this, "יש למלא את כל השדות", Toast.LENGTH_SHORT).show();
             }
         }
 
         if (view == btnLoginOk) {
-            if (etEmailLogin.getText().toString() != null &&
-                    etPasswordLogin.getText().toString() != null &&
-                    (!etEmailLogin.getText().toString().isEmpty()) &&
-                    (!etPasswordLogin.getText().toString().isEmpty())) {
+            if ((!etEmailLogin.getText().toString().isEmpty()) &&
+                    (!etPasswordLogin.getText().toString().isEmpty())&&
+                    (!etUserNameLogin.getText().toString().isEmpty())) {
                 //firebase. checking if the user is exist
                 fbAuth.signInWithEmailAndPassword(etEmailLogin.getText().toString(), etPasswordLogin.getText().toString())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -511,12 +557,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     User.getInstance().login();
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.makeText(MainActivity.this, "Authentication failed.  משתמש לא קיים",
                                             Toast.LENGTH_SHORT).show();
                                 }
                                 // ...
                             }
+
                         });
+            }else {
+                // If sign in fails, display a message to the user.
+                if(etUserNameLogin.getText().toString().isEmpty())
+                    etUserNameLogin.setError("השדה ריק. רשום שם משתמש");
+                if(etEmailLogin.getText().toString().isEmpty())
+                    etEmailLogin.setError("השדה ריק. הכנס מייל");
+                if(etPasswordLogin.getText().toString().isEmpty())
+                    etPasswordLogin.setError("השדה ריק. הכנס סיסמה");
             }
         }
     }
@@ -710,6 +765,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 isShowedAlarmBatteryOnce = true;
             }
         }
+    }
+
+    public void randomProfileImage () {
+        firebaseStorage = FirebaseStorage.getInstance();
+        listRef = firebaseStorage.getReference().child("imageProfileOptions");
+        listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+            @Override
+            public void onSuccess(ListResult listResult) {
+                Random random = new Random();
+                randomPlace = random.nextInt(listResult.getItems().size() + 1);
+
+                for (StorageReference file : listResult.getItems()) {
+                    randomPlace--;
+                    if (randomPlace == 0) {
+                        file.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                //   imagelist.add(uri.toString());
+//                                Random random = new Random();
+//                                randomPlace = random.nextInt(imagelist.size());
+                                stringUriImage = uri.toString();
+                                Log.e("ItemValue", uri.toString());
+                            }
+                        });
+                    }
+                }
+            }
+
+
+        });
+//        StorageReference storageReference=FirebaseStorage.getInstance().getReference();
+//
+//        try {
+//            localFile = File.createTempFile("imageProfileOptions", "jpg");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//
+//
+//        // Create file metadata including the content type
+//        StorageMetadata metadata = new StorageMetadata.Builder()
+//                .setContentType("imageProfileOptions/jpg")
+//                .build();
+//
+//    //    Picasso.get().load(imageSnapshot.child("imageUri").getValue(String.class)).into(imageViewQuestion);
     }
 
 //    @Override

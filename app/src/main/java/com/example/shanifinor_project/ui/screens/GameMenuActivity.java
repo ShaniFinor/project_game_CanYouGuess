@@ -49,19 +49,18 @@ public class GameMenuActivity extends AppCompatActivity {
         menuGridView.setAdapter(menuAdapter);
 
         numOfWin = User.getInstance().getNumOfWin();
-        if (numOfWin != 0) {
 
-            menuGridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    for (int i = 0; i < numOfWin; i++) {
-                        menuGridView.getChildAt(i).setBackgroundResource(R.drawable.finished_level_button);
-                    }
-                    menuGridView.getChildAt(numOfWin).setBackgroundResource(R.drawable.current_level_button);
-                    menuGridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+        menuGridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                for (int i = 0; i < numOfWin; i++) {
+                    menuGridView.getChildAt(i).setBackgroundResource(R.drawable.finished_level_button);
                 }
-            });
-        }
+                menuGridView.getChildAt(numOfWin).setBackgroundResource(R.drawable.current_level_button);
+                menuGridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+
 
         menuGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -71,7 +70,7 @@ public class GameMenuActivity extends AppCompatActivity {
                 }
                 if (position <= numOfWin) {
                     Intent intent = new Intent(GameMenuActivity.this, GameActivity.class);
-                    intent.putExtra("chosenLevel", position+1);
+                    intent.putExtra("chosenLevel", position + 1);
                     startActivity(intent);
                 }
             }
@@ -101,7 +100,4 @@ public class GameMenuActivity extends AppCompatActivity {
 
         return true;
     }
-
-
-
 }

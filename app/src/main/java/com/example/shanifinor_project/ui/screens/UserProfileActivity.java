@@ -17,9 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.shanifinor_project.R;
 import com.example.shanifinor_project.model.classes.User;
+import com.example.shanifinor_project.model.db.UserDao;
 import com.squareup.picasso.Picasso;
 
 public class UserProfileActivity extends AppCompatActivity implements View.OnClickListener {
@@ -27,31 +29,30 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
     private EditText newUserName, newUserEmail;
     private ImageButton userLogout;
     private ImageView imageProfile;
-    private Uri imageLocation;
+    static final int IMAGE = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        changeProfile=findViewById(R.id.changeProfile_button);
-        newUserName=findViewById(R.id.newName_editText);
-        newUserEmail=findViewById(R.id.newEmail_editText);
-        userLogout=findViewById(R.id.logout_imageView);
-        imageProfile=findViewById(R.id.imageViewProfile);
+        changeProfile = findViewById(R.id.changeProfile_button);
+        newUserName = findViewById(R.id.newName_editText);
+        newUserEmail = findViewById(R.id.newEmail_editText);
+        userLogout = findViewById(R.id.logout_imageView);
+        imageProfile = findViewById(R.id.imageViewProfile);
 
         newUserName.setText(User.getInstance().getName());
         newUserEmail.setText(User.getInstance().getEmail());
 
         newUserName.setFocusable(false);
         newUserEmail.setFocusable(false);
-
-        Picasso.get().load(User.getInstance().getIcon()).into(imageProfile);
-
+        if(!User.getInstance().getIcon().equals("")) {
+            Picasso.get().load(User.getInstance().getIcon()).into(imageProfile);
+        }
         changeProfile.setOnClickListener(this);
         userLogout.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -77,7 +78,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if(v==changeProfile) {
+        if (v == changeProfile) {
             if (!newUserName.isFocusable() && !newUserEmail.isFocusable()) {
                 newUserEmail.setFocusableInTouchMode(true);
                 newUserName.setFocusableInTouchMode(true);
@@ -93,7 +94,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
             }
         }
 
-        if(v==userLogout){
+        if (v == userLogout) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("אתם בטוחים שאתם רוצים להתנתק?")
                     .setCancelable(false)
@@ -117,35 +118,54 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-//    public void nextPageToAddLevel(View view) {
-//        Intent intent=new Intent(UserProfileActivity.this,EditProfileActivity.class);
-//        startActivity(intent);
-//    }
-
-    public void chooseImageFromLocalFile(View view) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
-        startActivityForResult(intent, 1);
+    public void nextPageToChangeImageProfile(View view) {
+        Intent intent = new Intent(UserProfileActivity.this, ImageItemsProfileActivity.class);
+        startActivityForResult(intent, IMAGE);
     }
 
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent dataIntent) {
-        super.onActivityResult(requestCode, resultCode, dataIntent);
-        if (requestCode == 1) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //get answer from image choose gallery options
+        // this method starts when you press on image from the options.
+        if (requestCode == IMAGE) {
             if (resultCode == RESULT_OK) {
-                if (dataIntent != null) {
-                    if (dataIntent.getData() != null) {
-                        imageLocation = dataIntent.getData();
-                        imageProfile.setImageURI(imageLocation);
-                    }
+                if (data != null) {
+                        // Toast.makeText(this, data.getDataString()+"", Toast.LENGTH_SHORT).show();
+                        String url = data.getStringExtra("url");
+                        User.getInstance().setIcon(url);
+                        Picasso.get().load(User.getInstance().getIcon()).into(imageProfile);
                 }
             }
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 
-    private void saveProfileChange(){
+//    public void chooseImageFromLocalFile(View view) {
+//        Intent intent = new Intent();
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        intent.setType("*/*");
+//        startActivityForResult(intent, 1);
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent dataIntent) {
+//        super.onActivityResult(requestCode, resultCode, dataIntent);
+//        if (requestCode == 1) {
+//            if (resultCode == RESULT_OK) {
+//                if (dataIntent != null) {
+//                    if (dataIntent.getData() != null) {
+//                        imageLocation = dataIntent.getData();
+//                        imageProfile.setImageURI(imageLocation);
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+
+    private void saveProfileChange() {
         if (!newUserEmail.getText().toString().isEmpty()) {
             User.getInstance().setEmail(newUserEmail.getText().toString());
         }

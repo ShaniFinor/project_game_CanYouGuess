@@ -2,11 +2,12 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">@color/purple</color>
 
     <color name="titleTextColor">#DD8135CC</color>
+    <color name="purple">#DD8135CC</color>
     <color name="titleShadowTextColor">#F888F8</color>
     <color name="whiteShadowColor">#80FFFFFF</color>
     <color name="backgroundFloatingMenuButtons">#EEEB42</color>
-
+    <color name="grayBox">#3A3A3A</color>
 </resources>

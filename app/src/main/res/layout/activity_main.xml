@@ -177,7 +177,8 @@
         app:backgroundTint="@color/whiteShadowColor"
         app:elevation="0sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/backgroundFloatingMenuButtons" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/win_chart_btn"
@@ -193,7 +194,8 @@
         app:layout_constraintCircle="@id/add_btn"
         app:layout_constraintCircleAngle="270"
         app:layout_constraintCircleRadius="100dp"
-        app:layout_constraintEnd_toStartOf="@+id/add_btn" />
+        app:layout_constraintEnd_toStartOf="@+id/add_btn"
+        app:rippleColor="@color/backgroundFloatingMenuButtons" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/sound_btn"
@@ -210,7 +212,8 @@
         app:layout_constraintCircleAngle="315"
         app:layout_constraintCircleRadius="100dp"
         app:layout_constraintEnd_toStartOf="@+id/profile_btn"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout" />
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:rippleColor="@color/backgroundFloatingMenuButtons" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/profile_btn"
@@ -226,6 +229,7 @@
         app:layout_constraintCircle="@id/add_btn"
         app:layout_constraintCircleAngle="0"
         app:layout_constraintCircleRadius="100dp"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/backgroundFloatingMenuButtons" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

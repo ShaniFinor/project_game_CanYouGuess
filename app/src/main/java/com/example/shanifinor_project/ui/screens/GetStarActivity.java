@@ -45,7 +45,7 @@ public class GetStarActivity extends AppCompatActivity implements View.OnClickLi
         points++;
         txtCounter.setText("" + points);
 
-        if (points == 10) {
+        if (points == 100) {
             btnButton.setClickable(false);
             points = 0;
             img_star_animation.setVisibility(View.VISIBLE);
