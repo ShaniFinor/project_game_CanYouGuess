@@ -231,7 +231,8 @@ public class GameActivity extends AppCompatActivity {
     private void showCluesAlert() {
         // shows the clue options
         AlertDialog.Builder cluesBuilder = new AlertDialog.Builder(this);
-        final CharSequence[] arrClues = {"פתיחת משבצת שבתמונה - עולה כוכב אחד", "גילוי אות", "העלמת חצי מהאותיות שבמאגר", "ראה מה התמונה המסתתרת"};
+//        final CharSequence[] arrClues = {"פתיחת משבצת שבתמונה - עולה כוכב אחד", "גילוי אות", "העלמת חצי מהאותיות שבמאגר", "ראה מה התמונה המסתתרת"};
+        final CharSequence[] arrClues = {"פתיחת משבצת שבתמונה - עולה כוכב אחד"};
         cluesBuilder.setTitle("רמזים").setItems(arrClues, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
