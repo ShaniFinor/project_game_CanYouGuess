@@ -23,6 +23,8 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
@@ -58,26 +60,21 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnGameMenu, btnInstructions, btnGetStar;
+
     private MediaPlayer mpClickSound;
 
     private FloatingActionButton fab_add, fab_chart, fab_sound, fab_profile;
     private Animation fabOpen, fabClose, fabRClockwise, fabRAntiClockwise;
     private boolean isOpen = false;
 
-    //  private Dialog dialogLogin;
     private EditText etUserNameLogin, etPasswordLogin, etEmailLogin;
     private Button btnLoginOk;
-    // private ImageView imgCloseLogin;
-    // private TextView textForRegistration;
-    //  private TextView textForRegistration;
 
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialogLogin;
     private AlertDialog dialogRegistration;
 
-    //  private Dialog dialogRegistration;
     private EditText etUserNameRegister, etEmailRegister, etPasswordRegister, etConfirmPasswordRegister;
-    private Button btnRegisterOk;
     private SubmitButton submitButtonRegister;
     private ImageView imgCloseRegister;
 
@@ -85,56 +82,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AnimatorSet mSetLeftIn;
     private boolean mIsBackVisible = false;
     private View mCardFrontLayout;
-    private View mCardBackLayout;
     private FrameLayout flipView;
 
     private AnimatorSet mSetRightOut2;
     private AnimatorSet mSetLeftIn2;
     private boolean mIsBackVisible2 = false;
     private View mCardFrontLayout2;
-    private View mCardBackLayout2;
     private FrameLayout flipView2;
 
     private AnimatorSet mSetRightOut3;
     private AnimatorSet mSetLeftIn3;
     private boolean mIsBackVisible3 = false;
     private View mCardFrontLayout3;
-    private View mCardBackLayout3;
     private FrameLayout flipView3;
 
     private AnimatorSet mSetRightOut4;
     private AnimatorSet mSetLeftIn4;
     private boolean mIsBackVisible4 = false;
     private View mCardFrontLayout4;
-    private View mCardBackLayout4;
     private FrameLayout flipView4;
 
     private AnimatorSet mSetRightOut5;
     private AnimatorSet mSetLeftIn5;
     private boolean mIsBackVisible5 = false;
     private View mCardFrontLayout5;
-    private View mCardBackLayout5;
     private FrameLayout flipView5;
 
     private FirebaseAuth fbAuth;
     private FirebaseUser fbUser;
-    private FirebaseDatabase database;
-    private DatabaseReference myRef;
 
     private BatteryBroadcastReceiver batteryReceiver;
     private boolean isShowedAlarmBatteryOnce = false;
 
-    public static final String PREFS_NAME = "MySharedPreferencesFile";
-
-    private File localFile = null;
-    StorageReference storageReference;
-    FirebaseStorage storage;
-    private Uri filePath;
     private FirebaseStorage firebaseStorage;
     private StorageReference listRef;
-    private ArrayList<String> imagelist = new ArrayList<>() ;
-    private  int randomPlace=0;
-    private String stringUriImage="";
+    private int randomPlace = 0;
+    private String stringUriImage = "";
 
 
     @Override
@@ -157,17 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         floatingActionMenuBar();
 
-//        fbAuth = FirebaseAuth.getInstance();
-//        fbUser = fbAuth.getCurrentUser();
-//        if (fbUser != null) { //if a user is signed in
-//            Toast.makeText(this, "user logged in: " + fbUser.getEmail(), Toast.LENGTH_SHORT).show();
-//            //    fab_login.setImageResource(R.drawable.ic_logout);
-//        }
-
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("users");
-
-        User.getInstance().isLoggedIn();
+        //    User.getInstance().isLoggedIn();
 
         batteryReceiver = new MainActivity.BatteryBroadcastReceiver();
         registerReceiver(batteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -178,42 +151,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-//        if (!User.getInstance().isLoggedIn()) {
-//            createLoginDialog();
-//        }
-
-        //User has successfully logged in, save this information
-// We need an Editor object to make preference changes.
-//        SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0); // 0 - for private mode
-//        SharedPreferences.Editor editor = settings.edit();
-//
-////Set "hasLoggedIn" to true
-//        editor.putBoolean("hasLoggedIn", true);
-//
-//// Commit the edits!
-//        editor.commit();
-//
-////Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
-//        boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
-
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
 
-        if(fbUser==null || User.getInstance()==null)
-        {
+        // if the current user is not logged in - create log in dialog
+        if (fbUser == null || !User.getInstance().isLoggedIn()) {
             createLoginDialog();
         }
-
-//        if(!hasLoggedIn || fbUser==null)
-//        {
-//            createLoginDialog();
-//        }
-//        if(!hasLoggedIn)
-//        {
-//            createLoginDialog();
-//        }
-
-
     }
 
 
@@ -341,17 +285,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
                 startActivity(intent);
-//                if (fbUser != null) {
-//                    User.getInstance().logOut();
-//                    fbUser = null;
-//                    Toast.makeText(MainActivity.this, "User signed out", Toast.LENGTH_SHORT).show();
-//                    fab_login.setImageResource(R.drawable.ic_login);
-//                } else {
-//                    createLoginDialog();
-//                }
             }
         });
-
     }
 
     public void createLoginDialog() {
@@ -360,34 +295,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final View loginPopupView = getLayoutInflater().inflate(R.layout.layout_login, null);
         dialogBuilder.setView(loginPopupView);
         dialogLogin = dialogBuilder.create();
-       // dialogLogin.setContentView(R.layout.layout_login);
-        // dialogLogin.setCancelable(true);
         etEmailLogin = loginPopupView.findViewById(R.id.etEmail_login);
         etUserNameLogin = loginPopupView.findViewById(R.id.etUserName_login);
         etPasswordLogin = loginPopupView.findViewById(R.id.etPassword_login);
-        //imgCloseLogin = loginPopupView.findViewById(R.id.close_login);
         btnLoginOk = loginPopupView.findViewById(R.id.btnLoginOk);
         dialogLogin.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogLogin.show();
         dialogLogin.setCanceledOnTouchOutside(false);
         btnLoginOk.setOnClickListener(this);
-//        imgCloseLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialogLogin.dismiss();
-//            }
-//        });
 
-//        btnLoginOk.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_UP) {
-//                    dialogLogin.dismiss();
-//
-//                }
-//                return true;
-//            }
-//        });
         final TextView textForRegistration = loginPopupView.findViewById(R.id.textForRegistration);
         textForRegistration.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -407,18 +323,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final View registerPopupView = getLayoutInflater().inflate(R.layout.layout_register, null);
         dialogBuilder.setView(registerPopupView);
         dialogRegistration = dialogBuilder.create();
-        dialogRegistration.setContentView(R.layout.layout_register);
-        // dialogRegistration.setCancelable(true);
+//        dialogRegistration.setContentView(R.layout.layout_register);
         etEmailRegister = registerPopupView.findViewById(R.id.etEmail_register);
         etPasswordRegister = registerPopupView.findViewById(R.id.etPassword_register);
         etUserNameRegister = registerPopupView.findViewById(R.id.etUserName_register);
         etConfirmPasswordRegister = registerPopupView.findViewById(R.id.etConfirmPassword_register);
         imgCloseRegister = registerPopupView.findViewById(R.id.close_register);
-        //btnRegisterOk = registerPopupView.findViewById(R.id.btnRegisterOk);
         submitButtonRegister = registerPopupView.findViewById(R.id.submitButton);
         dialogRegistration.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogRegistration.show();
-        // btnRegisterOk.setOnClickListener(this);
+        dialogRegistration.setCanceledOnTouchOutside(false);
         submitButtonRegister.setOnClickListener(this);
         imgCloseRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -427,34 +341,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 createLoginDialog();
             }
         });
-
-//        submitButtonRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // thread- so the button will have time to finish its annotation and after it finishes, it closed the dialog
-//                final Thread thread = new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            Thread.sleep(3500);
-//                            dialogRegistration.dismiss();
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
-//                thread.start();
-//            }
-//        });
-
     }
 
     @Override
     public void onClick(final View view) {
         if ((view == btnGameMenu) || (view == btnInstructions) || (view == btnGetStar)) {
-            if (MyService.isInstanceCreated()) { //אם הצליל ברקע פועל אז לאפשר צליל בעת לחיצה
+
+            // if the background music is on- make a sound when click on the button.
+            if (MyService.isInstanceCreated()) {
                 mpClickSound.start();
             }
+
             Intent intent = new Intent();
             if (view == btnGameMenu) {
                 intent = new Intent(MainActivity.this, GameMenuActivity.class);
@@ -467,82 +364,81 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             startActivity(intent);
         }
-//        if(view==starFlip1){
-//            float scale = view.getResources().getDisplayMetrics().density;
-//            view.setCameraDistance(8000 * scale);
-//        }
+
 
         if (view == submitButtonRegister) {
+            // hides the keyboard.
             InputMethodManager hideKeyboard = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             hideKeyboard.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
+            //if the fields are not empty
             if (etEmailRegister.getText().toString().length() != 0 &&
                     etPasswordRegister.getText().toString().length() != 0 &&
                     !etUserNameRegister.getText().toString().isEmpty() &&
                     !etConfirmPasswordRegister.getText().toString().isEmpty()) {
+                // if the email is ok
                 if (Patterns.EMAIL_ADDRESS.matcher(etEmailRegister.getText()).matches()) {
-                    if (etConfirmPasswordRegister.getText().toString().
-                            equals(etPasswordRegister.getText().toString())) {
-                        //firebase. saves the new user values
-                        fbAuth.createUserWithEmailAndPassword(etEmailRegister.getText().toString(), etPasswordRegister.getText().toString())
-                                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            // Sign in success, update UI with the signed-in user's information
-                                            UserDao userDao = new UserDao
-                                                    (0, stringUriImage, etUserNameRegister.getText().toString(), etEmailRegister.getText().toString(),
-                                                            0, 0, "", "",
-                                                            new ArrayList<String>(), new ArrayList<Integer>());
-                                            User.getInstance().registerNewUserToFirebase(userDao);
-                                            // thread- so the button will have time to finish its annotation and after it finishes, it closed the dialog
-                                            final Thread thread = new Thread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    try {
-                                                        Thread.sleep(3500);
-                                                        dialogRegistration.dismiss();
-                                                    } catch (InterruptedException e) {
-                                                        e.printStackTrace();
+                    //if the password length is 6 chars or more
+                    if (etPasswordRegister.getText().toString().length() >= 6) {
+                        // if the password is the 2 fields are the same
+                        if (etConfirmPasswordRegister.getText().toString().
+                                equals(etPasswordRegister.getText().toString())) {
+                            //firebase. saves the new user values
+                            fbAuth.createUserWithEmailAndPassword(etEmailRegister.getText().toString(), etPasswordRegister.getText().toString())
+                                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                // Sign in success, update UI with the signed-in user's information
+                                                UserDao userDao = new UserDao
+                                                        (0, stringUriImage, etUserNameRegister.getText().toString(), etEmailRegister.getText().toString(),
+                                                                0, 0, "", "",
+                                                                new ArrayList<String>(), new ArrayList<Integer>());
+                                                User.getInstance().registerNewUserToFirebase(userDao);
+                                                // thread- so the button will have time to finish its annotation and after it finishes(3500 millis), it closed the dialog
+                                                final Thread thread = new Thread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        try {
+                                                            Thread.sleep(3500);
+                                                            dialogRegistration.dismiss();
+                                                        } catch (InterruptedException e) {
+                                                            e.printStackTrace();
+                                                        }
                                                     }
-                                                }
-                                            });
-                                            thread.start();
-                                            // Toast.makeText(MainActivity.this, "Authentication success.", Toast.LENGTH_SHORT).show();
-                                            //   fab_login.setImageResource(R.drawable.ic_logout);
-                                        } else {
-                                            // If sign in fails, display a message to the user.
-                                            Toast.makeText(MainActivity.this, "ההרשמה נכשלה", Toast.LENGTH_SHORT).show();
+                                                });
+                                                thread.start();
+                                            } else {
+                                                // If sign in fails, display a message to the user.
+                                                Toast.makeText(MainActivity.this, "ההרשמה נכשלה", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-
-                                        // ...
-                                    }
-                                });
+                                    });
+                        } else {
+                            // if the password in the second filed isn't the same
+                            etConfirmPasswordRegister.setError("הכנס את אותה הסיסמה שהכנסת למעלה");
+                        }
                     } else {
-                        etConfirmPasswordRegister.setError("הכנס את אותה הסיסמה שהכנסת למעלה");
-                       // Toast.makeText(MainActivity.this, "הסיסמאות שונות", Toast.LENGTH_SHORT).show();
+                        etPasswordRegister.setError("הסיסמה צריכה להיות 6 תוים או יותר");
                     }
-                }else {
+                } else {
                     etEmailRegister.setError("מייל לא תקין");
-               //     Toast.makeText(MainActivity.this, "מייל לא תקין", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 // If sign in fails, display a message to the user.
-                if(etUserNameRegister.getText().toString().isEmpty())
+                if (etUserNameRegister.getText().toString().isEmpty())
                     etUserNameRegister.setError("השדה ריק. רשום שם משתמש");
-                if(etEmailRegister.getText().toString().isEmpty())
+                if (etEmailRegister.getText().toString().isEmpty())
                     etEmailRegister.setError("השדה ריק. הכנס מייל");
-                if(etPasswordRegister.getText().toString().isEmpty())
+                if (etPasswordRegister.getText().toString().isEmpty())
                     etPasswordRegister.setError("השדה ריק. הכנס סיסמה");
-                if(etConfirmPasswordRegister.getText().toString().isEmpty())
+                if (etConfirmPasswordRegister.getText().toString().isEmpty())
                     etConfirmPasswordRegister.setError("השדה ריק. הכנס את אותה הסיסמה שהכנסת למעלה");
-             //   Toast.makeText(MainActivity.this, "יש למלא את כל השדות", Toast.LENGTH_SHORT).show();
             }
         }
 
         if (view == btnLoginOk) {
             if ((!etEmailLogin.getText().toString().isEmpty()) &&
-                    (!etPasswordLogin.getText().toString().isEmpty())&&
+                    (!etPasswordLogin.getText().toString().isEmpty()) &&
                     (!etUserNameLogin.getText().toString().isEmpty())) {
                 //firebase. checking if the user is exist
                 fbAuth.signInWithEmailAndPassword(etEmailLogin.getText().toString(), etPasswordLogin.getText().toString())
@@ -551,26 +447,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    // Toast.makeText(MainActivity.this, "Authentication success.", Toast.LENGTH_SHORT).show();
                                     dialogLogin.dismiss();
-                                    // fab_login.setImageResource(R.drawable.ic_logout);
                                     User.getInstance().login();
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(MainActivity.this, "Authentication failed.  משתמש לא קיים",
-                                            Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "משתמש לא קיים", Toast.LENGTH_SHORT).show();
                                 }
-                                // ...
                             }
-
                         });
-            }else {
+            } else {
                 // If sign in fails, display a message to the user.
-                if(etUserNameLogin.getText().toString().isEmpty())
+                if (etUserNameLogin.getText().toString().isEmpty())
                     etUserNameLogin.setError("השדה ריק. רשום שם משתמש");
-                if(etEmailLogin.getText().toString().isEmpty())
+                if (etEmailLogin.getText().toString().isEmpty())
                     etEmailLogin.setError("השדה ריק. הכנס מייל");
-                if(etPasswordLogin.getText().toString().isEmpty())
+                if (etPasswordLogin.getText().toString().isEmpty())
                     etPasswordLogin.setError("השדה ריק. הכנס סיסמה");
             }
         }
@@ -767,24 +658,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void randomProfileImage () {
+    public void randomProfileImage() {
         firebaseStorage = FirebaseStorage.getInstance();
         listRef = firebaseStorage.getReference().child("imageProfileOptions");
         listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
             @Override
             public void onSuccess(ListResult listResult) {
+                // gets a random number from 0 to the number of pictures in the package "imageProfileOptions" in the storage.
                 Random random = new Random();
                 randomPlace = random.nextInt(listResult.getItems().size() + 1);
-
+                // goes through the pictures until getting the picture in the random place.
                 for (StorageReference file : listResult.getItems()) {
                     randomPlace--;
                     if (randomPlace == 0) {
                         file.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                //   imagelist.add(uri.toString());
-//                                Random random = new Random();
-//                                randomPlace = random.nextInt(imagelist.size());
+                                //gets the uri of the picture.
                                 stringUriImage = uri.toString();
                                 Log.e("ItemValue", uri.toString());
                             }
@@ -792,31 +682,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
             }
-
-
         });
-//        StorageReference storageReference=FirebaseStorage.getInstance().getReference();
-//
-//        try {
-//            localFile = File.createTempFile("imageProfileOptions", "jpg");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//
-//
-//        // Create file metadata including the content type
-//        StorageMetadata metadata = new StorageMetadata.Builder()
-//                .setContentType("imageProfileOptions/jpg")
-//                .build();
-//
-//    //    Picasso.get().load(imageSnapshot.child("imageUri").getValue(String.class)).into(imageViewQuestion);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        moveTaskToBack(true);
-//    }
+
 }

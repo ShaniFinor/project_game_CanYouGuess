@@ -48,7 +48,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
         newUserName.setFocusable(false);
         newUserEmail.setFocusable(false);
-        if(!User.getInstance().getIcon().equals("")) {
+        if(!User.getInstance().getIcon().equals("") && !User.getInstance().getIcon().equals(null)) {
             Picasso.get().load(User.getInstance().getIcon()).into(imageProfile);
         }
         changeProfile.setOnClickListener(this);
@@ -70,7 +70,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
 
-        item_stare_points.setTitle(User.getInstance().getStars() + "");
+        item_stare_points.setTitle("כוכבים: " + User.getInstance().getStars());
         item_level.setTitle("ניצחונות: " + User.getInstance().getNumOfWin());
 
         return true;
@@ -86,7 +86,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                 changeProfile.setText("שמירת  שינויים");
             } else {
                 saveProfileChange();
-
+                // hide the keyboard
                 InputMethodManager hideKeyboard = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 hideKeyboard.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
@@ -112,9 +112,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
             AlertDialog alert = builder.create();
             alert.setInverseBackgroundForced(true);
             alert.show();
-
         }
-
     }
 
 
@@ -131,7 +129,6 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         if (requestCode == IMAGE) {
             if (resultCode == RESULT_OK) {
                 if (data != null) {
-                        // Toast.makeText(this, data.getDataString()+"", Toast.LENGTH_SHORT).show();
                         String url = data.getStringExtra("url");
                         User.getInstance().setIcon(url);
                         Picasso.get().load(User.getInstance().getIcon()).into(imageProfile);
@@ -140,30 +137,6 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-
-//    public void chooseImageFromLocalFile(View view) {
-//        Intent intent = new Intent();
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        intent.setType("*/*");
-//        startActivityForResult(intent, 1);
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent dataIntent) {
-//        super.onActivityResult(requestCode, resultCode, dataIntent);
-//        if (requestCode == 1) {
-//            if (resultCode == RESULT_OK) {
-//                if (dataIntent != null) {
-//                    if (dataIntent.getData() != null) {
-//                        imageLocation = dataIntent.getData();
-//                        imageProfile.setImageURI(imageLocation);
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
 
     private void saveProfileChange() {
         if (!newUserEmail.getText().toString().isEmpty()) {

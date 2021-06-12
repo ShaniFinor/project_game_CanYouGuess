@@ -63,7 +63,6 @@ public class ImageItemsProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image_items_profile);
 
         setImageItemList();
-
     }
 
     private void setImageItemList() {
@@ -95,14 +94,6 @@ public class ImageItemsProfileActivity extends AppCompatActivity {
                 }
             }
         });
-//        recyclerView.OnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ImageItemsProfileActivity.this, UserProfileActivity.class);
-//                intent.putExtra("chosenLevel", recyclerView.getChildAdapterPosition(v));
-//                startActivity(intent);
-//            }
-//        });
     }
 
     public void closeAndSendUrlToUserProfile(String url) {
@@ -131,14 +122,12 @@ public class ImageItemsProfileActivity extends AppCompatActivity {
         if (requestCode == CAMERA_CODE) {
             if (resultCode == RESULT_OK) {
                 if (dataIntent != null) {
-                    // הפעלת המצלמה והשמת התמונה באפליקציה
                     //start the camera and set the picture in the app
                     Bitmap bitmap = (Bitmap) dataIntent.getExtras().get("data");
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     filePath = Uri.parse(MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver()
                             , bitmap, "Current", null));
-
                 }
             }
         }
@@ -185,7 +174,6 @@ public class ImageItemsProfileActivity extends AppCompatActivity {
     }
 
     public void camera(View view) {
-//          מצלמה פתיחת
         //open the camera
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intentCamera, CAMERA_CODE);
@@ -207,7 +195,7 @@ public class ImageItemsProfileActivity extends AppCompatActivity {
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
 
-        item_stare_points.setTitle(User.getInstance().getStars() + "");
+        item_stare_points.setTitle("כוכבים: " + User.getInstance().getStars());
         item_level.setTitle("ניצחונות: " + User.getInstance().getNumOfWin());
 
         return true;

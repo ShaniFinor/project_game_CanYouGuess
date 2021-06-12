@@ -19,11 +19,9 @@ import com.example.shanifinor_project.model.classes.User;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class GameMenuActivity extends AppCompatActivity {
-    //the levels in the game. each level leads to a different picture that the user has to guess
-//    private Button btn_level_1;
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    //private DatabaseReference myRefStars = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/stars");
-    //private DatabaseReference myRefDatabaseNumOfWin = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/numOfWin");
+    // the levels in the game.
+    // each level leads to a different picture that the user has to guess
+
     private Integer numOfWin = 0;
     private Integer numOfStars;
     private GridView menuGridView;
@@ -37,14 +35,15 @@ public class GameMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_menu);
 
-//        btn_level_1 = findViewById(R.id.btnLevel1);
-//        btn_level_1.setOnClickListener(this);
-
         mpClickSound = MediaPlayer.create(this, R.raw.click_sound);
 
         menuGridView = findViewById(R.id.gameMenuGridView);
 
-        ArrayAdapter<String> menuAdapter = new ArrayAdapter<>(this,
+        //context: GameMenuActivity.
+        // R.layout.gamemenu_levelview: the view of one level in the page of the gridView levels.
+        //R.id.list_item: the textView in the "R.layout.gamemenu_levelview".
+        //gridViewLevel: the array of string of the numbers of the levels.
+        ArrayAdapter<String> menuAdapter = new ArrayAdapter<>(GameMenuActivity.this,
                 R.layout.gamemenu_levelview, R.id.list_item, gridViewLevel);
         menuGridView.setAdapter(menuAdapter);
 
@@ -65,7 +64,7 @@ public class GameMenuActivity extends AppCompatActivity {
         menuGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if (MyService.isInstanceCreated()) { //אם הצליל פועל אז לאפשר צליל בעת לחיצה
+                if (MyService.isInstanceCreated()) { // if the background music is on- make a sound when click on the button.
                     mpClickSound.start();
                 }
                 if (position <= numOfWin) {
@@ -93,7 +92,7 @@ public class GameMenuActivity extends AppCompatActivity {
         final MenuItem item_level = menu.findItem(R.id.level);
 
         numOfStars = User.getInstance().getStars();
-        item_stare_points.setTitle(numOfStars + "");
+        item_stare_points.setTitle("כוכבים: " + numOfStars);
 
         numOfWin = User.getInstance().getNumOfWin();
         item_level.setTitle("ניצחונות: " + numOfWin);

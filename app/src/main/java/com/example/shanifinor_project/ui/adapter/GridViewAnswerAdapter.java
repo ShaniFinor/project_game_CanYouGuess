@@ -10,6 +10,7 @@ import android.widget.GridView;
 
 import com.example.shanifinor_project.R;
 import com.example.shanifinor_project.model.classes.User;
+import com.example.shanifinor_project.ui.common.Common;
 
 public class GridViewAnswerAdapter extends BaseAdapter {
     private char[] answerCharacter;
@@ -17,10 +18,8 @@ public class GridViewAnswerAdapter extends BaseAdapter {
 
     public GridViewAnswerAdapter(char[] answerCharacter, Context context) {
         this.answerCharacter = answerCharacter;
-        this.context = context;
+        this.context = context; //context: GameActivity
     }
-
-    // private String usersAnswer = "";
 
     @Override
     public int getCount() {
@@ -41,22 +40,6 @@ public class GridViewAnswerAdapter extends BaseAdapter {
     public View getView(final int i, View view, ViewGroup viewGroup) {
         Button button;
         if (view == null) {
-
-//            database = FirebaseDatabase.getInstance();
-//            myRef = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/guessedAnswer");
-//            myRef.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    usersAnswer = snapshot.getValue(String.class);
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//                }
-//            });
-//             usersAnswer += String.valueOf(answerCharacter[i]);
-//             myRef.setValue(usersAnswer);
-
             //create new button
             button = new Button(context);
             button.setLayoutParams(new GridView.LayoutParams(100, 100));
@@ -72,6 +55,8 @@ public class GridViewAnswerAdapter extends BaseAdapter {
         } else {
             button.setBackgroundResource(R.drawable.background_letters);
         }
+
         return button;
+
     }
 }

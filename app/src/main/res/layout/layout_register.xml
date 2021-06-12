@@ -137,20 +137,4 @@
         app:sub_btn_line_color="@color/purple"
         app:sub_btn_ripple_color="@color/titleShadowTextColor"
         app:sub_btn_tick_color="@color/white" />
-
-
-    <!--    <Button-->
-    <!--        android:id="@+id/btnRegisterOk"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_gravity="center"-->
-    <!--        android:layout_margin="80sp"-->
-    <!--        android:background="@drawable/gradient_background_3"-->
-    <!--        android:fontFamily="@font/secular_one"-->
-    <!--        android:shadowColor="#80FFFFFF"-->
-    <!--        android:shadowDx="-4"-->
-    <!--        android:shadowDy="4"-->
-    <!--        android:shadowRadius="10"-->
-    <!--        android:text="Register"-->
-    <!--        android:textColor="#FFFFFF"></Button>-->
 </LinearLayout>

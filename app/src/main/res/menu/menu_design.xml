@@ -4,19 +4,20 @@
     android:layoutDirection="rtl">
 
     <item
-        android:id="@+id/star_points"
-        android:checkable="false"
-        android:title=""
-        app:showAsAction="always"/>
-    <item
         android:id="@+id/star_icon"
         android:checkable="false"
         android:icon="@drawable/ic_star"
-        android:title="כוכבים"
-        app:showAsAction="always"/>
+        android:title="כוכבים:"
+        app:showAsAction="ifRoom|withText"/>
+
+    <item
+        android:id="@+id/star_points"
+        android:checkable="false"
+        android:title=""
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/level"
         android:title=""
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 </menu>

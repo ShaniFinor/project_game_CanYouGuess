@@ -33,7 +33,6 @@ public class ChartWinningsActivity extends AppCompatActivity {
     private UserDao usersFromData=new UserDao();
     private UserDao cUser=new UserDao();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private Map<String,UserDao> userDaoMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,6 @@ public class ChartWinningsActivity extends AppCompatActivity {
         final WinningsChartAdapter winningsChartAdapter = new WinningsChartAdapter(winnings);
         recyclerView_winnings.setAdapter(winningsChartAdapter);
 
-
         myRefUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -61,8 +59,6 @@ public class ChartWinningsActivity extends AppCompatActivity {
                             cUser = usersFromData;
                         }
                     }
-                    //User user2=new User(usersFromData.getIcon(),usersFromData.getName(),usersFromData.getNumOfWin());
-                    //winnings.add(user2);
                     winnings.add(usersFromData);
                 }
                 Collections.sort(winnings, new Comparator<UserDao>() {
@@ -77,22 +73,12 @@ public class ChartWinningsActivity extends AppCompatActivity {
                         return 0;
                     }
                 });
-
                 winningsChartAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
-//        for (int i = 0; i < 10; i++) {
-//            winnings.add(new User(i + 1,
-//                    "ic_star",
-//                    "name",
-//                    i
-//            ));
-//        }
-
-
     }
 
     @Override
@@ -110,7 +96,7 @@ public class ChartWinningsActivity extends AppCompatActivity {
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
 
-        item_stare_points.setTitle(User.getInstance().getStars() +"");
+        item_stare_points.setTitle("כוכבים: " + User.getInstance().getStars());
         item_level.setTitle("שלב: " + User.getInstance().getNumOfWin());
 
         return true;

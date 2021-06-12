@@ -33,8 +33,10 @@ public class WinningsChartAdapter extends RecyclerView.Adapter<WinningsChartAdap
     @Override
     public void onBindViewHolder(@NonNull WinViewHolder holder, int position) {
         UserDao currentWin = winnings.get(position);
-        holder.placeTextView.setText(position + 1 + "");
-        if(!User.getInstance().getIcon().equals("")){
+       // holder.placeTextView.setText(position + 1 + "");
+        holder.placeTextView.setText("");
+
+        if (!User.getInstance().getIcon().equals("")) {
             Picasso.get().load(currentWin.getIcon()).into(holder.playerImageView);
         }
         holder.nameTextView.getContext().getPackageName();

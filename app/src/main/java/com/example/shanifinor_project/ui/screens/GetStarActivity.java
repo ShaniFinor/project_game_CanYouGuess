@@ -70,11 +70,6 @@ public class GetStarActivity extends AppCompatActivity implements View.OnClickLi
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-//                            YoYo.with(Techniques.ZoomOut)
-//                                    .duration(700)
-//                                    .delay(60)
-//                                    .repeat(0)
-//                                    .playOn(img_star_animation);
                             img_star_animation.setVisibility(View.INVISIBLE);
                             doConfettiAnimation();
                         }
@@ -86,9 +81,6 @@ public class GetStarActivity extends AppCompatActivity implements View.OnClickLi
                             txtCounter.setText("0");
                             User.getInstance().setStars(User.getInstance().getStars() + 1);
                             invalidateOptionsMenu();
-//                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                            DatabaseReference myRef = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/stars");
-//                            myRef.setValue(numOfStars + 1);
                             btnButton.setClickable(true);
                         }
                     }, 2000);
@@ -112,32 +104,8 @@ public class GetStarActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onPrepareOptionsMenu(Menu menu) {
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
-        item_stare_points.setTitle(User.getInstance().getStars() +"");
+        item_stare_points.setTitle("כוכבים: " + User.getInstance().getStars());
         item_level.setTitle("ניצחונות: " + User.getInstance().getNumOfWin());
-//        myRefStars.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                numOfStars = snapshot.getValue(Integer.class);
-//                item_stare_points.setTitle(numOfStars + "");
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
-//        myRefDatabaseNumOfWin.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                numOfWin = snapshot.getValue(Integer.class);
-//                item_level.setTitle("שלב: " + numOfWin);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
-//        });
 
         return true;
     }

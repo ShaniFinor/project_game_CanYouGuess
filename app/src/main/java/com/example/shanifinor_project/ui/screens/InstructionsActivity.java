@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.engine.Resource;
 import com.example.shanifinor_project.R;
 import com.example.shanifinor_project.model.classes.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,9 +51,33 @@ public class InstructionsActivity extends AppCompatActivity {
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
 
-        item_stare_points.setTitle( User.getInstance().getStars() + "");
-
+        item_stare_points.setTitle("כוכבים: " + User.getInstance().getStars());
         item_level.setTitle("ניצחונות: " + User.getInstance().getNumOfWin());
+
+//        myRefStars.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                numOfStars = snapshot.getValue(Integer.class);
+//                item_stare_points.setTitle(numOfStars + "");
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+//        myRefDatabaseNumOfWin.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                numOfWin = snapshot.getValue(Integer.class);
+//                item_level.setTitle("שלב: " + numOfWin);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
 
         return true;
     }

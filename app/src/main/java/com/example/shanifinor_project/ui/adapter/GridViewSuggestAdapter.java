@@ -90,17 +90,17 @@ public class GridViewSuggestAdapter extends BaseAdapter {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        //if the number of buttons he pressed on,
+                        // smaller from the length of the word that the user need to find.
                         if (pressCount < gameActivity.answer.length) {
-                            //if the number of buttons he pressed on,
-                            // smaller from the length of the word that the user need to find.
 
-                            char compare = suggestSource.get(i).charAt(0);
                             //compare= the char from the suggestSource list in the place that the user pressed on (i).
                             // charAt(0) because in every place in the list there is one char.
+                            char compare = suggestSource.get(i).charAt(0);
 
                             Common.user_submit_answer[pressCount] = compare; //Get char (add the char to the Common int the pressCount place (in the next empty place)).
-                            GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(Common.user_submit_answer, context);
-                            gameActivity.gridViewAnswer.setAdapter(answerAdapter);
+                            GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(Common.user_submit_answer, context); //context: GameActivity
+                            gameActivity.gridViewAnswer.setAdapter(answerAdapter);//Update UI
 
                             List<Integer> placeChosenFromSuggestedString = User.getInstance().getPlaceChosenFromSuggestedString();
                             if (placeChosenFromSuggestedString == null) {
@@ -112,9 +112,9 @@ public class GridViewSuggestAdapter extends BaseAdapter {
 
                             StringBuilder usersCurrentAnswer = new StringBuilder();
 
-                            for (int i = 0; i < Common.user_submit_answer.length; i++) {
-                                if (Common.user_submit_answer[i] != '\u0000') {
-                                    usersCurrentAnswer.append(Common.user_submit_answer[i]);
+                            for (int j = 0; j < Common.user_submit_answer.length; j++) {
+                                if (Common.user_submit_answer[j] != '\u0000') {
+                                    usersCurrentAnswer.append(Common.user_submit_answer[j]);
                                     User.getInstance().setGuessedAnswer(usersCurrentAnswer.toString());
                                 }
                             }

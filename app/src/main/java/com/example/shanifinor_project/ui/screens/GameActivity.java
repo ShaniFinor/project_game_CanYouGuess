@@ -8,15 +8,19 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.shanifinor_project.ui.common.Common;
 import com.example.shanifinor_project.ui.adapter.GridViewAnswerAdapter;
 import com.example.shanifinor_project.ui.adapter.GridViewSuggestAdapter;
@@ -33,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.plattysoft.leonids.ParticleSystem;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -47,7 +52,6 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
     private ImageView imgClues;
     private AlertDialog cluesDialog;
-    //private Integer numOfStars;
 
     private List<String> suggestSource = new ArrayList<>();
     private GridViewAnswerAdapter answerAdapter;
@@ -55,102 +59,35 @@ public class GameActivity extends AppCompatActivity {
     private Button btnSubmit;
     public GridView gridViewAnswer, gridViewSuggest;
     private ImageView imageViewQuestion;
-    private List<Integer> imageList = new ArrayList<Integer>();
+
     public char[] answer;
     private String correct_answer = "";
     private static Random random = new Random();
-    private int currentImage = 0;
     private String answerFinishedLevel = "";
-    //    private GridView gameGridView;
-//    private static final String[] gridViewSquares = new String[]{
-//            "", "", "", "", "", "", "", "",
-//            "", "", "", "", "", "", "", ""};
     private int openPictureItems = 0;
     private int maxOpenPictureItems = 5;
     private TextView hiddenAndShownItems;
-    //  private String openImageViewItemsString="";
-    //private List<String> openImageViewItemsList = new ArrayList<>();
 
     //private String databaseStringAnswer = "";
     //private String databaseListStringSuggestedList = "";
-    private char[] result;
-
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    /**
-     * private DatabaseReference myRefStars = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/stars");
-     * private DatabaseReference myRefGuessedAnswer = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/guessedAnswer");
-     * private DatabaseReference myRefSuggestedString = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/suggestedString");
-     * private DatabaseReference myRefDatabaseOpenSquares = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/databaseOpenSquares");
-     * private DatabaseReference myRefPlaceChosenFromSuggestedString = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/placeChosenFromSuggestedString");
-     * private DatabaseReference myRefDatabaseNumOfWin = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/numOfWin");
-     **/
-    private UserDao currentUser;
     //private List<Integer> userDataSuggestArrayList = new ArrayList<>();
+
+    private char[] result;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     private ConstraintLayout constraintLayout;
     private Integer chosenLevelFromMenuActivity;
 
-    private List<StorageReference> imagesFromStorage;
-    private StorageReference storageReference;
+
     private final DatabaseReference myRefImageData = database.getReference("imagesData");
-    private List<String> listImagesName = new ArrayList<String>();
-    private File localFile = null;
 
+    private ImageButton imageButtonDeleteLetter;
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        myRefImageData.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot imageSnapshot : snapshot.getChildren()) {
-//                    if (imageSnapshot.getKey().equals(chosenLevelFromMenuActivity.toString())) {
-//                        correct_answer = imageSnapshot.child("imageName").getValue(String.class);
-//                        Toast.makeText(getApplicationContext(), "on  "+correct_answer , Toast.LENGTH_SHORT).show();
-//                        break;
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(getApplicationContext(), "onFailure 514 " , Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        /**UserDao userDao = User.getInstance().getUserDao();
-         String guessedAnswer = User.getInstance().getUserDao().getGuessedAnswer();
-
-         userDao.setGuessedAnswer("a");
-         User.getInstance().setUserDao(userDao);**/
-
-        /**DatabaseReference myRefUsers = database.getReference("users");
-         myRefUsers.addValueEventListener(new ValueEventListener() {
-        @Override public void onDataChange(@NonNull DataSnapshot snapshot) {
-        winnings.clear();
-        for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-        usersFromData = userSnapshot.getValue(UserDao.class);
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-        if (currentUser.getEmail().equals(usersFromData.getEmail())) {
-        cUser = usersFromData;
-        }
-        }
-        //User user2=new User(usersFromData.getIcon(),usersFromData.getName(),usersFromData.getNumOfWin());
-        //winnings.add(user2);
-        winnings.add(usersFromData);
-        }
-        winningsChartAdapter.notifyDataSetChanged();
-        }
-
-        @Override public void onCancelled(@NonNull DatabaseError error) {}
-        });**/
-
 
         constraintLayout = findViewById(R.id.gameConstraintLayout);
         imgClues = findViewById(R.id.imgClues);
@@ -161,28 +98,19 @@ public class GameActivity extends AppCompatActivity {
             }
         });
         btnSubmit = findViewById(R.id.btnSubmit);
-
-//        imageList.add(R.drawable.ic_add);
-//        imageList.add(R.drawable.ic_star);
+        hiddenAndShownItems = findViewById(R.id.hiddenAndShownItems_tv);
+        imageButtonDeleteLetter = findViewById(R.id.imageButton_deleteLetter);
 
         gridViewAnswer = findViewById(R.id.gridViewAnswer);
         gridViewSuggest = findViewById(R.id.gridViewSuggest);
         imageViewQuestion = findViewById(R.id.imageHidden);
 
         int numOfWin = User.getInstance().getNumOfWin();
-        chosenLevelFromMenuActivity = Objects.requireNonNull(getIntent().getExtras()).getInt("chosenLevel", numOfWin);
+        chosenLevelFromMenuActivity = Objects.requireNonNull(getIntent().getExtras()).getInt("chosenLevel");
 
         if (chosenLevelFromMenuActivity <= numOfWin) {
             showFinishedLevel();
         } else {
-            btnSubmit.setVisibility(View.VISIBLE);
-            btnSubmit.setClickable(true);
-            imgClues.setVisibility(View.VISIBLE);
-            imgClues.setClickable(true);
-
-            //shows the squares. and if the user opened squares it opens them.
-            showPictureInTheOpenSquares();
-
 //            List<Integer> userDataSuggestArrayList = User.getInstance().getPlaceChosenFromSuggestedString();
 //            for (int j = 0; j < suggestSource.size(); j++) {
 //                if (userDataSuggestArrayList.size() > j) {
@@ -197,87 +125,32 @@ public class GameActivity extends AppCompatActivity {
             //databaseStringAnswer = User.getInstance().getGuessedAnswer();
             runExistLevel();
         }
-
-        /**myRefDatabaseNumOfWin.addValueEventListener(new ValueEventListener() {
-        @Override public void onDataChange(@NonNull DataSnapshot snapshot) {
-        numOfWin = snapshot.getValue(Integer.class);
-        chosenLevelFromMenuActivity = Objects.requireNonNull(getIntent().getExtras()).getInt("chosenLevel", numOfWin);
-
-        if (chosenLevelFromMenuActivity < numOfWin) {
-        showFinishedLevel();
-        } else {
-        myRefDatabaseOpenSquares.addValueEventListener(new ValueEventListener() {
-        @Override public void onDataChange(@NonNull DataSnapshot snapshot) {
-        openImageViewItemsList.clear();
-        for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-        openImageViewItemsList.add(userSnapshot.getValue(String.class));
-        }
-        if (!openImageViewItemsList.isEmpty()) {
-        showPictureInOpenSquares();
-        }
-        }
-
-        @Override public void onCancelled(@NonNull DatabaseError error) {
-        }
-        });
-        //        myRefPlaceChosenFromSuggestedString.addValueEventListener(new ValueEventListener() {
-        //            @Override
-        //            public void onDataChange(@NonNull DataSnapshot snapshot) {
-        //                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-        //                    userDataSuggestArrayList.add(userSnapshot.getValue(Integer.class));
-        //
-        //                }
-        //                for (int j = 0; j < suggestSource.size(); j++) {
-        //                    if(userDataSuggestArrayList.size()> j){
-        //                        gridViewSuggest.getChildAt(userDataSuggestArrayList.get(j)).setAlpha(0);
-        //                        gridViewSuggest.getChildAt(j).setClickable(false);
-        //                    }
-        //                }
-        //            }
-        //            @Override
-        //            public void onCancelled(@NonNull DatabaseError error) {
-        //            }
-        //        });
-        myRefSuggestedString.addValueEventListener(new ValueEventListener() {
-        @Override public void onDataChange(@NonNull DataSnapshot snapshot) {
-        databaseListStringSuggestedList = snapshot.getValue(String.class);
-        suggestSource.add(databaseListStringSuggestedList);
-        }
-
-        @Override public void onCancelled(@NonNull DatabaseError error) {
-        }
-        });
-        //        myRefPlaceChosenFromSuggestedString.addValueEventListener(new ValueEventListener() {
-        //            @Override
-        //            public void onDataChange(@NonNull DataSnapshot snapshot) {
-        //                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-        //                    userDataSuggestArrayList.add(userSnapshot.getValue(Integer.class));
-        //                }
-        //            }
-        //            @Override
-        //            public void onCancelled(@NonNull DatabaseError error) {
-        //            }
-        //        });
-        myRefGuessedAnswer.addValueEventListener(new ValueEventListener() {
-        @Override public void onDataChange(@NonNull DataSnapshot snapshot) {
-        databaseStringAnswer = snapshot.getValue(String.class);
-        runExistLevel();
-        }
-
-        @Override public void onCancelled(@NonNull DatabaseError error) {
-        }
-        });
-        }
-        }
-
-        @Override public void onCancelled(@NonNull DatabaseError error) {
-        }
-        });**/
-
     }
 
+    public void showAllThePageViews() {
+        btnSubmit.setVisibility(View.VISIBLE);
+        btnSubmit.setClickable(true);
+        imgClues.setVisibility(View.VISIBLE);
+        imgClues.setClickable(true);
+        hiddenAndShownItems.setVisibility(View.VISIBLE);
+        hiddenAndShownItems.setClickable(true);
+        imageButtonDeleteLetter.setVisibility(View.VISIBLE);
+        imageButtonDeleteLetter.setClickable(true);
+    }
+
+    public void doNotShowAllThePageViews() {
+        btnSubmit.setVisibility(View.INVISIBLE);
+        btnSubmit.setClickable(false);
+        imgClues.setVisibility(View.INVISIBLE);
+        imgClues.setClickable(false);
+        hiddenAndShownItems.setVisibility(View.INVISIBLE);
+        hiddenAndShownItems.setClickable(false);
+        imageButtonDeleteLetter.setVisibility(View.INVISIBLE);
+        imageButtonDeleteLetter.setClickable(false);
+    }
 
     public void showPictureInTheOpenSquares() {
+        //open the squares - if the user opened squares it opens them.
         List<String> openSquaresList = User.getInstance().getDatabaseOpenSquares();
         for (int i = 0; i < openSquaresList.size(); i++) {
             String tag = openSquaresList.get(i);
@@ -286,23 +159,35 @@ public class GameActivity extends AppCompatActivity {
             imageView2.setClickable(false);
         }
         openPictureItems = openSquaresList.size();
-        hiddenAndShownItems = findViewById(R.id.hiddenAndShownItems_tv);
         hiddenAndShownItems.setText((maxOpenPictureItems + User.getInstance().getPlace()) + "/" + openPictureItems);
     }
 
     public void hideThePicture() {
-        // close all the squares tha were open
-        List<String> openSquaresList = User.getInstance().getDatabaseOpenSquares();
-        for (int i = 0; i < openSquaresList.size(); i++) {
-            String tag = openSquaresList.get(i);
-            ImageView imageView = constraintLayout.findViewWithTag(tag);
-            imageView.setVisibility(View.VISIBLE);
-            imageView.setClickable(true);
+/**  // close all the squares that were open
+//        List<String> openSquaresList = User.getInstance().getDatabaseOpenSquares();
+//        for (int i = 0; i < openSquaresList.size(); i++) {
+//            String tag = openSquaresList.get(i);
+//            ImageView imageView = constraintLayout.findViewWithTag(tag);
+//            imageView.setVisibility(View.VISIBLE);
+//            imageView.setClickable(true);
+//        }
+//        openSquaresList.clear();
+//        User.getInstance().setDatabaseOpenSquares(openSquaresList);
+//        openPictureItems = 0;
+//        hiddenAndShownItems.setText(maxOpenPictureItems + "/" + "0"); **/
+
+        // the loop numbers are both 5 because the squares (images that hide the picture) is 5*5;
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                //goes on every square and makes it visible - see the square.
+                String tag = i + "," + j;
+                ImageView imageView2 = constraintLayout.findViewWithTag(tag);
+                imageView2.setVisibility(View.VISIBLE);
+                imageView2.setClickable(true);
+            }
         }
-        openSquaresList.clear();
-        User.getInstance().setDatabaseOpenSquares(openSquaresList);
+        User.getInstance().setDatabaseOpenSquares(null);
         openPictureItems = 0;
-        hiddenAndShownItems = findViewById(R.id.hiddenAndShownItems_tv);
         hiddenAndShownItems.setText(maxOpenPictureItems + "/" + "0");
     }
 
@@ -342,24 +227,6 @@ public class GameActivity extends AppCompatActivity {
         gridViewAnswer.setAdapter(answerAdapter);
     }
 
-//    private void setUpRandomImage() {
-//        // Random Picture
-//        currentImage = imageList.get(random.nextInt(imageList.size()));
-////        DatabaseReference myRef = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/place");
-////        myRef.setValue(imageList.indexOf((Integer) currentImage));
-//        imageViewQuestion.setImageResource(currentImage);
-//        correct_answer = getResources().getResourceName(currentImage);
-//        correct_answer = correct_answer.substring(correct_answer.lastIndexOf("/") + 1);
-//    }
-
-//    private char[] setUpNullList() {
-//       result = new char[answer.length];
-//        for (int i = 0; i < answer.length; i++) {
-//            result[i] = ' ';
-//        }
-//        return result;
-//    }
-
 
     private void showCluesAlert() {
         // shows the clue options
@@ -387,96 +254,32 @@ public class GameActivity extends AppCompatActivity {
 
 
     private void runExistLevel() {
-        //setUpRandomImage();
-        // setUpImage();
-        findImagePlaceFromFB(chosenLevelFromMenuActivity.toString());
+        showAllThePageViews(); //set- visibility: visible , clickable: true
 
+        //open the squares - if the user opened squares it opens them.
+        showPictureInTheOpenSquares();
+
+        findImagePlaceFromFB(chosenLevelFromMenuActivity.toString());
     }
 
     private void findImagePlaceFromFB(final String chosenLevel) {
         myRefImageData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //   Iterable<DataSnapshot> children = snapshot.getChildren();
                 for (DataSnapshot imageSnapshot : snapshot.getChildren()) {
                     if (imageSnapshot.getKey().equals(chosenLevel)) {
                         correct_answer = imageSnapshot.child("imageNameForUri").getValue(String.class);
                         Picasso.get().load(imageSnapshot.child("imageUri").getValue(String.class)).into(imageViewQuestion);
-
-                        //  setImageViewFromFB(imageSnapshot.child("imageNameForUri").getValue(String.class));
-//                        correct_answer = imageSnapshot.child("imageName").getValue(String.class);
-//                        setImageViewFromFB(correct_answer);
                     }
                 }
-                //  Toast.makeText(getApplicationContext(), "onSuccess  " + correct_answer, Toast.LENGTH_SHORT).show();
                 runLevel();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), "onFailure 514 ", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(), "onFailure of findImagePlaceFromFB ", Toast.LENGTH_LONG).show();
             }
         });
     }
-
-//    private void G() {
-//        setUpAnswer();
-//        setUpSaveList();
-//        initView();
-//    }
-
-//    private void setUpImage() {
-//        findImagePlaceFromFB();
-//
-//      //  correct_answer=listImagesName.get(chosenLevelFromMenuActivity);
-//
-//        //currentImage = imageList.get(random.nextInt(imageList.size()));
-//        //imageViewQuestion.setImageResource(currentImage);
-//       // correct_answer = getResources().getResourceName(currentImage);
-//
-//        //correct_answer = correct_answer.substring(correct_answer.lastIndexOf("/") +1);
-//
-////        DatabaseReference myRef = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/place");
-////        myRef.addValueEventListener(new ValueEventListener() {
-////            @Override
-////            public void onDataChange(@NonNull DataSnapshot snapshot) {
-////                currentImage = snapshot.getValue(Integer.class);
-////                imageViewQuestion.setImageResource(imageList.get(currentImage));
-////            }
-////            @Override
-////            public void onCancelled(@NonNull DatabaseError error) {
-////            }
-////        });
-////        correct_answer = getResources().getResourceName(imageList.get(currentImage));
-////        correct_answer = correct_answer.substring(correct_answer.lastIndexOf("/") + 1);
-//
-//    }
-
-
-//    public void setImageViewFromFB(String imageName) {
-//       // correct_answer = imageName;
-//        storageReference = FirebaseStorage.getInstance().getReference();
-//        try {
-//            localFile = File.createTempFile("images", "jpg");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        final Uri fileUri = Uri.fromFile(localFile);
-//        final StorageReference riversRef = storageReference.child("images/" + imageName + ".jpg");
-//        riversRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                imageViewQuestion.setImageURI(fileUri);
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(getApplicationContext(), "onFailure 538 ", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//    }
 
     private void runLevel() {
         setUpAnswer();
@@ -502,37 +305,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setUpSaveList() {
-        //answer = correct_answer.toCharArray();
-//        answer = new char[correct_answer.length()];
-//        for (int i = 0; i < correct_answer.length(); i++) {
-//            answer[i] = correct_answer.charAt(i);
-//        }
-//
-//        Common.user_submit_answer = new char[answer.length];
-//
-//        Common.count = databaseStringAnswer.length();
-//        for (int i = 0; i < databaseStringAnswer.length(); i++) {
-//            Common.user_submit_answer[i] = databaseStringAnswer.charAt(i);
-//        }
-
-
-//        databaseListStringSuggestedList="";
-//        suggestSource.clear();
-//        DatabaseReference myRef2 = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/suggestedString");
-//        myRef2.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                databaseListStringSuggestedList = snapshot.getValue(String.class);
-//                suggestSource.add(databaseListStringSuggestedList);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
-//        });
-
-
-//        if (suggestSource == null || suggestSource.size() == 0|| databaseListStringSuggestedList.equals("")) {
         String databaseListStringSuggestedList = User.getInstance().getSuggestedString();
         if (databaseListStringSuggestedList.equals("")) {
             suggestSource.clear();
@@ -554,10 +326,10 @@ public class GameActivity extends AppCompatActivity {
                     suggestSource.add(Common.alphabet_character[random.nextInt(Common.alphabet_character.length)]);
                 }
             }
-            //Sort random our list
+            // Sort random our list
             Collections.shuffle(suggestSource);
 
-            //    databaseListStringSuggestedList = suggestSource.toString();
+            // databaseListStringSuggestedList = suggestSource.toString();
             for (int i = 0; i < suggestSource.size(); i++) {
                 databaseListStringSuggestedList += suggestSource.get(i);
                 if (i != suggestSource.size() - 1) {
@@ -568,21 +340,13 @@ public class GameActivity extends AppCompatActivity {
             String[] temp = databaseListStringSuggestedList.split(",");
             suggestSource.clear();
             suggestSource.addAll(Arrays.asList(temp));
-//            for (int i = 0; i < temp.length; i++) {
-//                suggestSource.add(temp[i]);
-//            }
         }
         User.getInstance().setSuggestedString(databaseListStringSuggestedList);
 
 
         //Set for GridView
-//        answerAdapter = new GridViewAnswerAdapter(setResultUserAnswerList(), this);
         suggestAdapter = new GridViewSuggestAdapter(suggestSource, this, this);
-
-
         suggestAdapter.notifyDataSetChanged();
-//        answerAdapter.notifyDataSetChanged();
-//        gridViewAnswer.setAdapter(answerAdapter);
 
         gridViewSuggest.setAdapter(suggestAdapter);
         List<Integer> placeChosenFromSuggestedString = User.getInstance().getPlaceChosenFromSuggestedString();
@@ -595,12 +359,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         }
-
         suggestAdapter.notifyDataSetChanged();
-
-
-//        DatabaseReference myRef = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/guessedAnswer");
-//        myRef.setValue(result2);
     }
 
     private void initView() {
@@ -617,30 +376,57 @@ public class GameActivity extends AppCompatActivity {
                     User.getInstance().setNumOfWin(User.getInstance().getNumOfWin() + 1);
                     User.getInstance().setSuggestedString("");
                     User.getInstance().setPlace(0);
-
-                    //imageList.remove((Integer) currentImage);
-                    //       imagesFromStorage.remove(currentImage);
-                    hideThePicture();
                     invalidateOptionsMenu();
-                    chosenLevelFromMenuActivity++;
-                    myRefImageData.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            int childrenCount = (int) snapshot.getChildrenCount();
-                            if (childrenCount > User.getInstance().getNumOfWin()) {
-                                findImagePlaceFromFB(User.getInstance().getNumOfWin() + 1 + "");
-                            }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
+                    showFinishedLevel();
+                    new ParticleSystem(GameActivity.this, 50, R.drawable.ic_star, 10000000)
+                            .setSpeedModuleAndAngleRange(0f, 0.4f, 0, 0)
+                            .setRotationSpeed(144)
+                            .setAcceleration(0.00005f, 90)
+                            .setStartTime(0)
+                            .emit(0, 0, 15);
+                    gridViewSuggest.setVisibility(View.INVISIBLE);
 
-                } else {
-                    Toast.makeText(GameActivity.this, "Incorrect!!", Toast.LENGTH_SHORT).show();
+                    //after 5000 millySeconds the run() method start.
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            hideThePicture();
+                            chosenLevelFromMenuActivity++;
+                            myRefImageData.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    int childrenCount = (int) snapshot.getChildrenCount();
+                                    if (childrenCount > User.getInstance().getNumOfWin()) {
+                                        gridViewSuggest.setVisibility(View.VISIBLE);
+                                        runExistLevel();
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                }
+                            });
+                            reset();
+                        }
+                    }, 5000);
                 }
-                reset();
+                else {
+                    Toast.makeText(GameActivity.this, "Incorrect!!", Toast.LENGTH_SHORT).show();
+
+                    //the animation (YoYo) starts and after 700 millySeconds the method reset() starts.
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .delay(50)
+                            .repeat(0)
+                            .playOn(gridViewAnswer);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            reset();
+                        }
+                    }, 700);
+                }
             }
         });
     }
@@ -652,55 +438,14 @@ public class GameActivity extends AppCompatActivity {
 
         User.getInstance().setPlaceChosenFromSuggestedString(null);
         User.getInstance().setGuessedAnswer("");
-        //  DatabaseReference myRef = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/guessedAnswer");
-
 
         //Set Adapter
-//        answerAdapter = new GridViewAnswerAdapter(setUpNullList(), getApplicationContext());
         answerAdapter = new GridViewAnswerAdapter(setResultUserAnswerList(), getApplicationContext());
         gridViewAnswer.setAdapter(answerAdapter);
         answerAdapter.notifyDataSetChanged();
 
-
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef2 = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/suggestedString");
-//        myRef2.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                databaseListStringSuggestedList = snapshot.getValue(String.class);
-//                suggestSource.add(databaseListStringSuggestedList);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
-//        });
-
-//        suggestAdapter = new GridViewSuggestAdapter(suggestSource, getApplicationContext(), GameActivity.this);
-
         suggestAdapter = new GridViewSuggestAdapter(suggestSource, this, GameActivity.this);
         gridViewSuggest.setAdapter(suggestAdapter);
-//        myRefPlaceChosenFromSuggestedString.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-//                    userDataSuggestArrayList.add(userSnapshot.getValue(Integer.class));
-//
-//                    for (int j = 0; j < suggestSource.size(); j++) {
-//                        if(userDataSuggestArrayList.size()< j){
-//                                gridViewSuggest.getChildAt(j).setAlpha(1);
-//                                gridViewSuggest.getChildAt(j).setClickable(true);
-//                        }
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
-//        });
-//        suggestAdapter.notifyDataSetChanged();
-
-
     }
 
 
@@ -728,13 +473,7 @@ public class GameActivity extends AppCompatActivity {
         }
         return result;
     }
-//    private char[] setAnswerList() {
-//        result = new char[correct_answer.length()];
-//        for (int i = 0; i < correct_answer.length(); i++) {
-//            result[i] = correct_answer.charAt(i);
-//        }
-//        return result;
-//    }
+
 
     public void flipSquares(View view) {
         //onClick
@@ -747,7 +486,6 @@ public class GameActivity extends AppCompatActivity {
             databaseOpenSquares.add(tag);
             User.getInstance().setDatabaseOpenSquares(databaseOpenSquares);
 
-            hiddenAndShownItems = findViewById(R.id.hiddenAndShownItems_tv);
             openPictureItems++;
             hiddenAndShownItems.setText((maxOpenPictureItems + User.getInstance().getPlace()) + "/" + openPictureItems);
         }
@@ -755,6 +493,8 @@ public class GameActivity extends AppCompatActivity {
 
 
     public void showFinishedLevel() {
+        doNotShowAllThePageViews(); //set- visibility: invisible , clickable: false
+
         // the loop numbers are both 5 because the squares (images that hide the picture) is 5*5;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -765,10 +505,6 @@ public class GameActivity extends AppCompatActivity {
                 imageView2.setClickable(false);
             }
         }
-        btnSubmit.setVisibility(View.INVISIBLE);
-        btnSubmit.setClickable(false);
-        imgClues.setVisibility(View.INVISIBLE);
-        imgClues.setClickable(false);
 
         setUpImageFinishedLevel();
     }
@@ -781,12 +517,10 @@ public class GameActivity extends AppCompatActivity {
                     if (imageSnapshot.getKey().equals(chosenLevelFromMenuActivity.toString())) {
                         answerFinishedLevel = imageSnapshot.child("imageNameForUri").getValue(String.class);
                         Picasso.get().load(imageSnapshot.child("imageUri").getValue(String.class)).into(imageViewQuestion);
-                        // setImageViewFromFB(answerFinishedLevel);
                     }
                 }
                 setUpAnswerForFinishedLevel();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -809,6 +543,33 @@ public class GameActivity extends AppCompatActivity {
         gridViewAnswer.setAdapter(answerAdapter);
     }
 
+    public void deleteWord(View view) {
+        //start onClick of imageButton (image of a trash can)
+
+        if (User.getInstance().getGuessedAnswer().length() > 1) {
+            User.getInstance().getPlaceChosenFromSuggestedString().remove(User.getInstance().getPlaceChosenFromSuggestedString().size() - 1);
+            Common.user_submit_answer[User.getInstance().getPlaceChosenFromSuggestedString().size()] = '\u0000';
+
+            StringBuilder usersCurrentAnswer = new StringBuilder();
+            for (int i = 0; i < Common.user_submit_answer.length; i++) {
+                if (Common.user_submit_answer[i] != '\u0000') {
+                    usersCurrentAnswer.append(Common.user_submit_answer[i]);
+                    User.getInstance().setGuessedAnswer(usersCurrentAnswer.toString());
+                }
+            }
+            Common.setCount(usersCurrentAnswer.length());
+//            Common.setCount(Common.getCount()-1);
+            answerAdapter = new GridViewAnswerAdapter(setResultUserAnswerList(), getApplicationContext());
+            gridViewAnswer.setAdapter(answerAdapter);
+            answerAdapter.notifyDataSetChanged();
+
+            suggestAdapter = new GridViewSuggestAdapter(suggestSource, this, GameActivity.this);
+            gridViewSuggest.setAdapter(suggestAdapter);
+        } else {
+            reset();
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -824,7 +585,7 @@ public class GameActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
-        item_stare_points.setTitle(User.getInstance().getStars() + "");
+        item_stare_points.setTitle("כוכבים: " + User.getInstance().getStars());
         item_level.setTitle("ניצחונות: " + User.getInstance().getNumOfWin());
         return true;
     }
@@ -844,48 +605,11 @@ public class GameActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    public void deleteWord(View view) {
-        if(User.getInstance().getGuessedAnswer().length()>1) {
-
-
-//            User.getInstance().setPlaceChosenFromSuggestedString(User.getInstance().getPlaceChosenFromSuggestedString());
-//
-//            char[] guessedAnswerTemp = new char[User.getInstance().getGuessedAnswer().length() - 1];
-//            String stringGuessedAnswerTemp = "";
-//            for (int i = 0; i < guessedAnswerTemp.length; i++) {
-//                guessedAnswerTemp[i] = User.getInstance().getGuessedAnswer().charAt(i);
-//                stringGuessedAnswerTemp += User.getInstance().getGuessedAnswer().charAt(i);
-//            }
-//            Common.setUser_submit_answer(guessedAnswerTemp);
-            User.getInstance().getPlaceChosenFromSuggestedString().remove(User.getInstance().getPlaceChosenFromSuggestedString().size() - 1);
-            Common.user_submit_answer[User.getInstance().getPlaceChosenFromSuggestedString().size()]='\u0000';
-
-            StringBuilder usersCurrentAnswer = new StringBuilder();
-//            User.getInstance().setGuessedAnswer(stringGuessedAnswerTemp);
-            for (int i = 0; i < Common.user_submit_answer.length; i++) {
-                if (Common.user_submit_answer[i] != '\u0000') {
-                    usersCurrentAnswer.append(Common.user_submit_answer[i]);
-                    User.getInstance().setGuessedAnswer(usersCurrentAnswer.toString());
-                }
-            }
-
-            answerAdapter = new GridViewAnswerAdapter(setResultUserAnswerList(), getApplicationContext());
-            gridViewAnswer.setAdapter(answerAdapter);
-            answerAdapter.notifyDataSetChanged();
-
-
-            suggestAdapter = new GridViewSuggestAdapter(suggestSource, this, GameActivity.this);
-            gridViewSuggest.setAdapter(suggestAdapter);
-
-        }
-        else {
-            reset();
-        }
-
-    }
-
 
 //    public void downloadImage(View view){
+//
+////    private File localFile = null;
+////    private StorageReference storageReference;
 //
 //        // Create a Cloud Storage reference from the app
 //        StorageReference storageRef=FirebaseStorage.getInstance().getReference();
@@ -965,36 +689,4 @@ public class GameActivity extends AppCompatActivity {
 //        }
 //    }
 
-
-//    public void listAllPaginated(@Nullable String pageToken) {
-//        FirebaseStorage storage = FirebaseStorage.getInstance();
-//        StorageReference listRef = storage.getReference().child("files/uid");
-//
-//        // Fetch the next page of results, using the pageToken if we have one.
-//        Task<ListResult> listPageTask = pageToken != null
-//                ? listRef.list(100, pageToken)
-//                : listRef.list(100);
-//
-//        listPageTask
-//                .addOnSuccessListener(new OnSuccessListener<ListResult>() {
-//                    @Override
-//                    public void onSuccess(ListResult listResult) {
-//                        List<StorageReference> prefixes = listResult.getPrefixes();
-//                        List<StorageReference> items = listResult.getItems();
-//
-//                        // Process page of results
-//                        // ...
-//
-//                        // Recurse onto next page
-//                        if (listResult.getPageToken() != null) {
-//                            listAllPaginated(listResult.getPageToken());
-//                        }
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                // Uh-oh, an error occurred.
-//            }
-//        });
-//    }
 }

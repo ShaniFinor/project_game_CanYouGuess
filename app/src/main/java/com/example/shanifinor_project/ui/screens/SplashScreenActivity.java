@@ -40,6 +40,7 @@ public class SplashScreenActivity extends AppCompatActivity implements Observer 
         progressText = findViewById(R.id.text_view_progress);
     }
 
+
     @Override
     public void update() {
         final Handler handler = new Handler();
@@ -58,14 +59,7 @@ public class SplashScreenActivity extends AppCompatActivity implements Observer 
                     Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                     startActivity(intent);
                     Intent intentService = new Intent(SplashScreenActivity.this, MyService.class);
-                    //      startService(intentService);
-
-                    if (MyService.isInstanceCreated()) {
-                        stopService(intentService);
-                    } else {
-                        startService(intentService);
-                    }
-
+                    startService(intentService);
                 }
             }
         }, 50);
@@ -125,7 +119,11 @@ public class SplashScreenActivity extends AppCompatActivity implements Observer 
 //                    particleView.pause();
 //                    Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
 //                    Repository.getInstance().unregister(SplashScreenActivity.this);
-//                    startActivity(intent);
+//                     if (MyService.isInstanceCreated()) {
+//                        stopService(intentService);
+//                    } else {
+//                        startService(intentService);
+//                    }
 //                }
 //            }
 //        }, 50);
