@@ -26,10 +26,12 @@ public class WinningsChartAdapter extends RecyclerView.Adapter<WinningsChartAdap
     @NonNull
     @Override
     public WinViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //R.layout.recycleritem_winnings_chart - xml of how looks one line in the RecyclerView.
         View winView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycleritem_winnings_chart, parent, false);
         return new WinViewHolder(winView);
     }
 
+    // position- go over 0,1,2,... until gets to getItemCount().
     @Override
     public void onBindViewHolder(@NonNull WinViewHolder holder, int position) {
         UserDao currentWin = winnings.get(position);

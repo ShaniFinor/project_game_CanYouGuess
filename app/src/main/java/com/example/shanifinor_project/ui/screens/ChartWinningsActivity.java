@@ -45,7 +45,7 @@ public class ChartWinningsActivity extends AppCompatActivity {
 
         final ArrayList<UserDao> winnings = new ArrayList<UserDao>();
         final WinningsChartAdapter winningsChartAdapter = new WinningsChartAdapter(winnings);
-        recyclerView_winnings.setAdapter(winningsChartAdapter);
+        recyclerView_winnings.setAdapter(winningsChartAdapter); //connecting between the Adapter and the RecyclerView
 
         myRefUsers.addValueEventListener(new ValueEventListener() {
             @Override

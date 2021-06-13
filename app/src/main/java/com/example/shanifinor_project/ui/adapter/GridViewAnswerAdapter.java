@@ -36,6 +36,8 @@ public class GridViewAnswerAdapter extends BaseAdapter {
         return i;
     }
 
+    // getView - build every line in the adapter. the method called as the number of the objects in the adapter.
+    // create view which is one line in the RecyclerView
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         Button button;
