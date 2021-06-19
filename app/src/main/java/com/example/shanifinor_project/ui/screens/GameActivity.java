@@ -128,6 +128,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void showAllThePageViews() {
+        //set- visibility: visible , clickable: true
         btnSubmit.setVisibility(View.VISIBLE);
         btnSubmit.setClickable(true);
         imgClues.setVisibility(View.VISIBLE);
@@ -139,6 +140,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void doNotShowAllThePageViews() {
+        //set- visibility: invisible , clickable: false
         btnSubmit.setVisibility(View.INVISIBLE);
         btnSubmit.setClickable(false);
         imgClues.setVisibility(View.INVISIBLE);
@@ -264,6 +266,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void findImagePlaceFromFB(final String chosenLevel) {
+        //finds the image in the given place
         myRefImageData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
