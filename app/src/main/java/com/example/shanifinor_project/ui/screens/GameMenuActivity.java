@@ -18,9 +18,11 @@ import com.example.shanifinor_project.R;
 import com.example.shanifinor_project.model.classes.User;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * the levels in the game.
+ * each level leads to a different picture that the user has to guess
+ */
 public class GameMenuActivity extends AppCompatActivity {
-    // the levels in the game.
-    // each level leads to a different picture that the user has to guess
 
     private Integer numOfWin = 0;
     private Integer numOfStars;

@@ -58,6 +58,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * in this page there are registration, login dialogs.
+ * buttons to move to another page
+ * button to mute and unmute the music
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnGameMenu, btnInstructions, btnGetStar;
 

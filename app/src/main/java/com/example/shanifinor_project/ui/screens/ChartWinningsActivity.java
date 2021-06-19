@@ -27,6 +27,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 
+/**
+ * list of the users. shows them in recyclerView
+ */
 public class ChartWinningsActivity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRefUsers = database.getReference("users");

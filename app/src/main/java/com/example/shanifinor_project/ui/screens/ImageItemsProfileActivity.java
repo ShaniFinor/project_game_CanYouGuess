@@ -43,6 +43,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
+/**
+ * the profile page
+ * RecyclerView of the images from the package ImageProfileOptions in Storage
+ * buttons to open the camera and open the gallery
+ */
 public class ImageItemsProfileActivity extends AppCompatActivity {
 
     private ArrayList<String> imagelist = new ArrayList<>();

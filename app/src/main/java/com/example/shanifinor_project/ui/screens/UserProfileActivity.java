@@ -24,6 +24,9 @@ import com.example.shanifinor_project.model.classes.User;
 import com.example.shanifinor_project.model.db.UserDao;
 import com.squareup.picasso.Picasso;
 
+/**
+ * the profile page of the user
+ */
 public class UserProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private Button changeProfile;
     private EditText newUserName, newUserEmail;

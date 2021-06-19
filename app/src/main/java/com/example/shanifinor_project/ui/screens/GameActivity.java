@@ -49,6 +49,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * the picture hides under the squares. square opens on click.
+ * there is a gridView of the words that suggested to the user and there is a gridView of the words that the user choose.
+ * the picture is load from the firebase. the pictures are in the storage.
+ */
 public class GameActivity extends AppCompatActivity {
     private ImageView imgClues;
     private AlertDialog cluesDialog;

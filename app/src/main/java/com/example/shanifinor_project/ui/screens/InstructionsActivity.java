@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * the instructions of the game
+ */
 public class InstructionsActivity extends AppCompatActivity {
 //    private FirebaseDatabase database = FirebaseDatabase.getInstance();
 //    private DatabaseReference myRefStars = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/stars");

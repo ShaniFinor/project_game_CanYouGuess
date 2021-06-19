@@ -18,6 +18,9 @@ import java.util.Observable;
 
 import me.ibrahimsn.particle.ParticleView;
 
+/**
+ * loading page. when the animation gets to 100% - go to MainActivity.
+ */
 public class SplashScreenActivity extends AppCompatActivity implements Observer {
 
     private ParticleView particleView;

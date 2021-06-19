@@ -19,8 +19,10 @@ import com.example.shanifinor_project.R;
 import com.example.shanifinor_project.model.classes.User;
 import com.plattysoft.leonids.ParticleSystem;
 
+/**
+ * game in order to get a star. after pressing 100 times on the button and its starts an annotate of a star, the user gets a star.
+ */
 public class GetStarActivity extends AppCompatActivity implements View.OnClickListener {
-    // game in order to get a star. after pressing 100 times on the button and its starts an annotate of a star, the user gets a star.
     private Button btnButton;
     private TextView txtCounter;
     private ImageView img_star_animation;
