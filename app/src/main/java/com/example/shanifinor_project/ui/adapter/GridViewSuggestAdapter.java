@@ -12,19 +12,23 @@ import com.example.shanifinor_project.ui.common.Common;
 import com.example.shanifinor_project.R;
 import com.example.shanifinor_project.model.classes.User;
 import com.example.shanifinor_project.ui.screens.GameActivity;
-import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class builds the letter buttons displayed to the user according to the list of letters received.
+ * disappear the buttons that the user selected (placeChosenFromSuggestedString) from the suggest list.
+ * when the user press on a button from the suggest list, if the number of buttons he pressed on, smaller from the length of the word that the user need to find:
+ * disappear the button from the suggest list, send the letter to GridViewAnswerAdapter (create new button with that letter).
+ */
 public class GridViewSuggestAdapter extends BaseAdapter {
     private List<String> suggestSource;
     private Context context;
     private GameActivity gameActivity; //activity
     private Integer pressCount;
 
-
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     public GridViewSuggestAdapter(List<String> suggestSource, Context context, GameActivity gameActivity) {
         this.suggestSource = suggestSource;

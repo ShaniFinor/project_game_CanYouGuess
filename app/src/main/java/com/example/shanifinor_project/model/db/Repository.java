@@ -13,10 +13,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Repository is a singleton class which stores and updates all data from the database.
+ * Every time someone opens the app and every time there is a change in the database, this class will go through the entire database and create for me a list of UserDao users.
+ */
 public class Repository {
     private Map<String, UserDao> users = new HashMap<>();
 
-    // Signleton
+    // Singleton
     private static Repository instance = null;
 
     // Observer

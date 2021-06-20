@@ -12,6 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * User is a singleton class which holds and updates the current user.
+ * This class goes through all the information in the Repository and searches for the current user who is connected to the application.
+ * Because the Repository is always updated when there are changes to the database, the User is also always updated.
+ * The User holds within it a UserDao variable that constitutes the current user.
+ * If I need to get or change information in the current user, I will refer to this class.
+ */
 public class User implements Observer {
     private UserDao userDao;
     private String key;

@@ -3,6 +3,13 @@ package com.example.shanifinor_project.model.db;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * userDao is a DAO class for users. (DAO- Data Access Object)
+ * the DAO provides some specific data operations without exposing details of the database.
+ * I need this class to save and remove users from the database.
+ * When I add a new user to the database, I create a new UserDao variable.
+ * When I want to update or get a user's details, I get a UserDao variable.
+ */
 public class UserDao {
 
     private int place;

@@ -7,6 +7,11 @@ import android.os.IBinder;
 
 import com.example.shanifinor_project.R;
 
+/**
+ * A Service is an application component that can perform long-running operations in the background.
+ * In my project I use a music service.
+ * The purpose of this service is to play or stop the sound of the background music.
+ */
 
 public class MyService extends Service {
     public static MediaPlayer player;

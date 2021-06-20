@@ -16,6 +16,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+/**
+ * The adapters provide a binding from an app-specific data set to views that are displayed within a RecyclerView.
+ * (responsible for providing views that represent items in a data set).
+ * build list of Users
+ */
 public class WinningsChartAdapter extends RecyclerView.Adapter<WinningsChartAdapter.WinViewHolder> {
     private ArrayList<UserDao> winnings;
 
@@ -35,7 +40,7 @@ public class WinningsChartAdapter extends RecyclerView.Adapter<WinningsChartAdap
     @Override
     public void onBindViewHolder(@NonNull WinViewHolder holder, int position) {
         UserDao currentWin = winnings.get(position);
-       // holder.placeTextView.setText(position + 1 + "");
+        // holder.placeTextView.setText(position + 1 + "");
         holder.placeTextView.setText("");
 
         if (!User.getInstance().getIcon().equals("")) {

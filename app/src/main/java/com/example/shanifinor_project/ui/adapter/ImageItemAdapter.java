@@ -15,6 +15,14 @@ import com.example.shanifinor_project.R;
 
 import java.util.ArrayList;
 
+/**
+ * Basic class of adapter for displaying list data in RecyclerView.
+ * This is a base class for an adapter.
+ * Adapters provide a link from an application-specific data set to the views displayed within RecyclerView.
+ *
+ * A class that builds the list of images displayed to the user according to the images he receives.
+ * The purpose of the class is to display the images as an items.
+ */
 public class ImageItemAdapter extends RecyclerView.Adapter<ImageItemAdapter.ViewHolder> {
 
     private ArrayList<String> imageList;

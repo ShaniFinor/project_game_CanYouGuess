@@ -12,6 +12,11 @@ import com.example.shanifinor_project.R;
 import com.example.shanifinor_project.model.classes.User;
 import com.example.shanifinor_project.ui.common.Common;
 
+/**
+ * The purpose of the class is to display the letters as an item of buttons.
+ * it builds an empty button or with the letter (char) given to it.
+ * The number of times the method is called is the length of the array (getCount()).
+ */
 public class GridViewAnswerAdapter extends BaseAdapter {
     private char[] answerCharacter;
     private Context context;
