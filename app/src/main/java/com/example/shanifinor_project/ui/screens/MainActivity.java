@@ -414,30 +414,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 thread.start();
                                             } else {
                                                 // If sign in fails, display a message to the user.
-                                                Toast.makeText(MainActivity.this, "ההרשמה נכשלה", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(MainActivity.this, getResources().getString(R.string.login_fail), Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
                         } else {
                             // if the password in the second filed isn't the same
-                            etConfirmPasswordRegister.setError("הכנס את אותה הסיסמה שהכנסת למעלה");
+                            etConfirmPasswordRegister.setError(getResources().getString(R.string.enter_same_password));
                         }
                     } else {
-                        etPasswordRegister.setError("הסיסמה צריכה להיות 6 תוים או יותר");
+                        etPasswordRegister.setError(getResources().getString(R.string.password_length));
                     }
                 } else {
-                    etEmailRegister.setError("מייל לא תקין");
+                    etEmailRegister.setError(getResources().getString(R.string.fail_mail));
                 }
             } else {
                 // If sign in fails, display a message to the user.
                 if (etUserNameRegister.getText().toString().isEmpty())
-                    etUserNameRegister.setError("השדה ריק. רשום שם משתמש");
+                    etUserNameRegister.setError(getResources().getString(R.string.empty_name));
                 if (etEmailRegister.getText().toString().isEmpty())
-                    etEmailRegister.setError("השדה ריק. הכנס מייל");
+                    etEmailRegister.setError(getResources().getString(R.string.empty_email));
                 if (etPasswordRegister.getText().toString().isEmpty())
-                    etPasswordRegister.setError("השדה ריק. הכנס סיסמה");
+                    etPasswordRegister.setError(getResources().getString(R.string.empty_password));
                 if (etConfirmPasswordRegister.getText().toString().isEmpty())
-                    etConfirmPasswordRegister.setError("השדה ריק. הכנס את אותה הסיסמה שהכנסת למעלה");
+                    etConfirmPasswordRegister.setError(getResources().getString(R.string.empty_same_password));
             }
         }
 
@@ -456,18 +456,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     User.getInstance().login();
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(MainActivity.this, "משתמש לא קיים", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, getResources().getString(R.string.user_does_not_exist), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
             } else {
                 // If sign in fails, display a message to the user.
                 if (etUserNameLogin.getText().toString().isEmpty())
-                    etUserNameLogin.setError("השדה ריק. רשום שם משתמש");
+                    etUserNameLogin.setError(getResources().getString(R.string.empty_name));
                 if (etEmailLogin.getText().toString().isEmpty())
-                    etEmailLogin.setError("השדה ריק. הכנס מייל");
+                    etEmailLogin.setError(getResources().getString(R.string.empty_email));
                 if (etPasswordLogin.getText().toString().isEmpty())
-                    etPasswordLogin.setError("השדה ריק. הכנס סיסמה");
+                    etPasswordLogin.setError(getResources().getString(R.string.empty_password));
             }
         }
     }

@@ -31,7 +31,7 @@ public class InstructionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instructions);
 
         TextView textView_title1=findViewById(R.id.textView_title1);
-        String text="המשחק";
+        String text=getResources().getString(R.string.the_game);
         SpannableString spannableString=new SpannableString(text);
         UnderlineSpan underlineSpan=new UnderlineSpan();
         spannableString.setSpan(underlineSpan,0,5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -54,8 +54,8 @@ public class InstructionsActivity extends AppCompatActivity {
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
 
-        item_stare_points.setTitle("כוכבים: " + User.getInstance().getStars());
-        item_level.setTitle("ניצחונות: " + User.getInstance().getNumOfWin());
+        item_stare_points.setTitle(getResources().getString(R.string.stars)+" "+ User.getInstance().getStars());
+        item_level.setTitle(getResources().getString(R.string.wins) +" "+ User.getInstance().getNumOfWin());
 
 //        myRefStars.addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -74,7 +74,7 @@ public class InstructionsActivity extends AppCompatActivity {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                numOfWin = snapshot.getValue(Integer.class);
-//                item_level.setTitle("שלב: " + numOfWin);
+//                item_level.setTitle("" + numOfWin);
 //            }
 //
 //            @Override

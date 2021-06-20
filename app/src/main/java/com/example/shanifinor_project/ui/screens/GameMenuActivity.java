@@ -93,12 +93,8 @@ public class GameMenuActivity extends AppCompatActivity {
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
 
-        numOfStars = User.getInstance().getStars();
-        item_stare_points.setTitle("כוכבים: " + numOfStars);
-
-        numOfWin = User.getInstance().getNumOfWin();
-        item_level.setTitle("ניצחונות: " + numOfWin);
-
+        item_stare_points.setTitle(getResources().getString(R.string.stars)+" "+ User.getInstance().getStars());
+        item_level.setTitle(getResources().getString(R.string.wins) +" "+ User.getInstance().getNumOfWin());
         return true;
     }
 }

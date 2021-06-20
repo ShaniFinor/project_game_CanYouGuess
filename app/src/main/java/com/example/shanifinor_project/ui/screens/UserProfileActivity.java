@@ -73,8 +73,8 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
 
-        item_stare_points.setTitle("כוכבים: " + User.getInstance().getStars());
-        item_level.setTitle("ניצחונות: " + User.getInstance().getNumOfWin());
+        item_stare_points.setTitle(getResources().getString(R.string.stars)+" "+ User.getInstance().getStars());
+        item_level.setTitle(getResources().getString(R.string.wins) +" "+ User.getInstance().getNumOfWin());
 
         return true;
     }
@@ -86,7 +86,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                 newUserEmail.setFocusableInTouchMode(true);
                 newUserName.setFocusableInTouchMode(true);
 
-                changeProfile.setText("שמירת  שינויים");
+                changeProfile.setText(getResources().getString(R.string.save_changes));
             } else {
                 saveProfileChange();
                 // hide the keyboard
@@ -99,15 +99,15 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
         if (v == userLogout) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("אתם בטוחים שאתם רוצים להתנתק?")
+            builder.setMessage(getResources().getString(R.string.logout_alert))
                     .setCancelable(false)
-                    .setPositiveButton("כן", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             User.getInstance().logOut();
                             UserProfileActivity.this.finish();
                         }
                     })
-                    .setNegativeButton("לא", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                         }

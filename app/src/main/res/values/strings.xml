@@ -45,4 +45,28 @@
     <string name="register">הרשמה</string>
 
     <string name="activity_profile_title">פרופיל</string>
+
+    <string name="clues">רמזים</string>
+    <string name="clue_openSquare">פתיחת משבצת שבתמונה - עולה כוכב אחד</string>
+    <string name="not_enough_stars_for_clue">"איו לך מספיק כוכבים בשביל לקנות רמז זה"</string>
+
+    <string name="stars">כוכבים: </string>
+    <string name="wins">ניצחונות: </string>
+
+    <string name="save_changes">שמירת  שינויים</string>
+    <string name="logout_alert">אתם בטוחים שאתם רוצים להתנתק?</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="the_game">המשחק</string>
+
+    <string name="login_fail">ההרשמה נכשלה</string>
+    <string name="enter_same_password">הכנס את אותה הסיסמה שהכנסת למעלה</string>
+    <string name="password_length">הסיסמה צריכה להיות 6 תוים או יותר</string>
+    <string name="fail_mail">מייל לא תקין</string>
+    <string name="empty_name">השדה ריק. רשום שם משתמש</string>
+    <string name="empty_email">השדה ריק. הכנס מייל</string>
+    <string name="empty_password">השדה ריק. הכנס סיסמה</string>
+    <string name="empty_same_password">השדה ריק. הכנס את אותה הסיסמה שהכנסת למעלה</string>
+
+    <string name="user_does_not_exist">משתמש לא קיים</string>
 </resources>

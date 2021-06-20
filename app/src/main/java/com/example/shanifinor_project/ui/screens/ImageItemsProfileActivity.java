@@ -199,9 +199,8 @@ public class ImageItemsProfileActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
-
-        item_stare_points.setTitle("כוכבים: " + User.getInstance().getStars());
-        item_level.setTitle("ניצחונות: " + User.getInstance().getNumOfWin());
+        item_stare_points.setTitle(getResources().getString(R.string.stars)+" "+ User.getInstance().getStars());
+        item_level.setTitle(getResources().getString(R.string.wins) +" "+ User.getInstance().getNumOfWin());
 
         return true;
     }

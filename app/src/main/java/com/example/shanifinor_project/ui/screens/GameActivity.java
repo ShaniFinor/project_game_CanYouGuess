@@ -238,20 +238,19 @@ public class GameActivity extends AppCompatActivity {
     private void showCluesAlert() {
         // shows the clue options
         AlertDialog.Builder cluesBuilder = new AlertDialog.Builder(this);
-//        final CharSequence[] arrClues = {"פתיחת משבצת שבתמונה - עולה כוכב אחד", "גילוי אות", "העלמת חצי מהאותיות שבמאגר", "ראה מה התמונה המסתתרת"};
-        final CharSequence[] arrClues = {"פתיחת משבצת שבתמונה - עולה כוכב אחד"};
-        cluesBuilder.setTitle("רמזים").setItems(arrClues, new DialogInterface.OnClickListener() {
+        final CharSequence[] arrClues = {getResources().getString(R.string.clue_openSquare)};
+        cluesBuilder.setTitle(getResources().getString(R.string.clues)).setItems(arrClues, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Toast.makeText(GameActivity.this, arrClues[i], Toast.LENGTH_SHORT).show();
-                if (arrClues[i] == "פתיחת משבצת שבתמונה - עולה כוכב אחד") {
+                if (arrClues[i] == getResources().getString(R.string.clue_openSquare)) {
                     if (User.getInstance().getStars() > 0) {
                         User.getInstance().setStars(User.getInstance().getStars() - 1);
                         User.getInstance().setPlace(User.getInstance().getPlace() + 1);
                         invalidateOptionsMenu();
                         showPictureInTheOpenSquares();
                     } else {
-                        Toast.makeText(GameActivity.this, "איו לך מספיק כוכבים בשביל לקנות רמז זה", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GameActivity.this, getResources().getString(R.string.not_enough_stars_for_clue), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -594,8 +593,9 @@ public class GameActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         final MenuItem item_stare_points = menu.findItem(R.id.star_points);
         final MenuItem item_level = menu.findItem(R.id.level);
-        item_stare_points.setTitle("כוכבים: " + User.getInstance().getStars());
-        item_level.setTitle("ניצחונות: " + User.getInstance().getNumOfWin());
+        item_stare_points.setTitle(getResources().getString(R.string.stars)+" "+ User.getInstance().getStars());
+        item_level.setTitle(getResources().getString(R.string.wins) +" "+ User.getInstance().getNumOfWin());
+
         return true;
     }
 
