@@ -8,6 +8,7 @@
     <string name="main_activity_get_star">השג כוכב</string>
 
     <string name="activity_get_star_text">בשביל לקבל כוכב, צריך ללחוץ 100 פעמים על הכפתור האדום</string>
+    <string name="zero">0</string>
 
     <string name="activity_game_menu_levels">שלבים</string>
 
@@ -43,8 +44,18 @@
     <string name="password_required">סיסמה</string>
     <string name="login">התחברות</string>
     <string name="register">הרשמה</string>
+    <string name="if_you_are_not_registered">אם אתם לא רשומים, לחצו כאן</string>
 
+    <string name="validate_password">אימות סיסמה</string>
     <string name="activity_profile_title">פרופיל</string>
+    <string name="log_out">התנתקות</string>
+    <string name="name">שם:</string>
+    <string name="email">מייל:</string>
+    <string name="hint_user_name">שם משתמש</string>
+    <string name="hint_email">אימייל</string>
+    <string name="profile_image">תמונת פרופיל:</string>
+    <string name="to_change_image">לשינוי תמונה</string>
+    <string name="edit">עריכה</string>
 
     <string name="clues">רמזים</string>
     <string name="clue_openSquare">פתיחת משבצת שבתמונה - עולה כוכב אחד</string>
@@ -69,4 +80,8 @@
     <string name="empty_same_password">השדה ריק. הכנס את אותה הסיסמה שהכנסת למעלה</string>
 
     <string name="user_does_not_exist">משתמש לא קיים</string>
+
+    <string name="camera">מצלמה</string>
+    <string name="picture_from_phone">תמונה מהפלאפון</string>
+
 </resources>

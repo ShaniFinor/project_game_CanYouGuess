@@ -31,7 +31,7 @@
         android:background="@drawable/background_ui_button"
         android:fontFamily="@font/secular_one"
         android:onClick="chooseImageFromLocalFile"
-        android:text="תמונה מהפלאפון"
+        android:text="@string/picture_from_phone"
         android:textColor="@color/gray" />
 
     <Button
@@ -42,6 +42,6 @@
         android:background="@drawable/background_ui_button"
         android:fontFamily="@font/secular_one"
         android:onClick="camera"
-        android:text="מצלמה"
+        android:text="@string/camera"
         android:textColor="@color/gray" />
 </FrameLayout>

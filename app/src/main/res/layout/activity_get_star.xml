@@ -19,7 +19,7 @@
         android:shadowDx="-4"
         android:shadowDy="4"
         android:shadowRadius="10"
-        android:text="0"
+        android:text="@string/zero"
         android:textColor="@color/white"
         android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/btnButton"
